@@ -13,6 +13,8 @@ const Form = () => {
     email: '',
   });
 
+  
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -98,14 +100,128 @@ pdf.text(`TO: ${formData.toLocation}`, 108, 59.5);
 pdf.rect(107, 62, 83, 7,); 
 pdf.text(`DATE OF MOVING: ${formData.dateOfoPacking}`, 108, 66.5);
 
+//end of first layer
+
+//second layer
+pdf.setFontSize(8);
+pdf.text(12, 75, 'Dear Sir/Madam')
+pdf.text(12, 78, 'We thank you for your valueable enquiry for Packing & Moving of your Office/House Articles On')
+pdf.text(12, 81, 'Door to Door basis.We are in pleasure to Quote our reasonable charges as hereunder')
+
+pdf.setFontSize(12);
+pdf.setFillColor(255, 0, 0);
+pdf.rect(12, 87, 150, 6, 'F'); 
+
+pdf.setDrawColor(0, 0, 0);
+pdf.rect(12, 87, 12, 6);
+pdf.rect(24, 87, 85, 6);
+pdf.rect(109, 87, 26, 6);
+pdf.rect(135, 87, 27, 6);
+
+pdf.setTextColor(255, 255, 255);
+pdf.text(`Sl no`, 12.5, 91);
+pdf.text(`Particulars`, 54.5, 91);
+pdf.text(`Part Load`, 112.5, 91);
+pdf.text(`Full Load`, 138.5, 91);
+
+//line1 
+pdf.rect(12, 93, 12, 6);
+pdf.rect(24, 93, 85, 6);
+pdf.rect(109, 93, 26, 6);
+pdf.rect(135, 93, 27, 6);
+
+pdf.setTextColor(0, 0, 0);
+pdf.setFontSize(10);
+pdf.text(`1`, 17, 97);
+pdf.text(`Transportation charges-(Door to Door /Gdn to Gdn)`, 25, 97);
+pdf.text(`${formData.transportChrPart}`, 116.5, 97);
+pdf.text(`${formData.transportChrFull}`, 142.5, 97);
+
+let incFull;
+let incPart;
+
+
+if(formData.transportChrPart !== ""){
+  incPart = "Included";
+
+
+}
+else{
+  incPart = "";
+ 
+}
+if(formData.transportChrFull !== ""){
+  incFull = "Included";
   
+
+}
+else{
+  incFull = "";
+
+}
+
+//line2 
+pdf.rect(12, 99, 12, 6);
+pdf.rect(24, 99, 85, 6);
+pdf.rect(109, 99, 26, 6);
+pdf.rect(135, 99, 27, 6);
+
+pdf.setTextColor(0, 0, 0);
+pdf.setFontSize(10);
+pdf.text(`2`, 17, 103);
+pdf.text(`Packing charges - Using Quality packing materials`, 25, 103);
+pdf.text(`${incPart}`, 116.5, 103);
+pdf.text(`${incFull}`, 142.5, 103);
+
+
+
+//line3
+pdf.rect(12, 105,12, 6);
+pdf.rect(24, 105,85, 6);
+pdf.rect(109,105, 26, 6);
+pdf.rect(135,105, 27, 6);
+
+pdf.setTextColor(0, 0, 0);
+pdf.setFontSize(10);
+pdf.text(`3`, 17, 109);
+pdf.text(`Unacking charges - Using Quality packing materials`, 25, 109);
+pdf.text(`${incPart}`, 116.5, 109);
+pdf.text(`${incFull}`, 142.5, 109);
+
+//line4
+pdf.rect(12, 111,12, 6);
+pdf.rect(24, 111,85, 6);
+pdf.rect(109,111, 26, 6);
+pdf.rect(135,111, 27, 6);
+
+pdf.setTextColor(0, 0, 0);
+pdf.setFontSize(10);
+pdf.text(`4`, 17, 115);
+pdf.text(`Loading Charges & Unloading Charges`, 25, 115);
+pdf.text(`${incPart}`, 116.5, 115);
+pdf.text(`${incFull}`, 142.5, 115);
+
+//line5
+pdf.rect(12, 117,12, 6);
+pdf.rect(24, 117,85, 6);
+pdf.rect(109,117, 26, 6);
+pdf.rect(135,117, 27, 6);
+
+pdf.setTextColor(0, 0, 0);
+pdf.setFontSize(10);
+pdf.text(`5`, 17, 121);
+pdf.text(`Car/Bike Transportation with Loading & Unloading`, 25, 121);
+pdf.text(`${formData.carChrPart}`, 116.5, 121);
+pdf.text(`${formData.carChrFull}`, 142.5, 121);
+
+
    
     pdf.save('formData.pdf');
   };
 
   return (
     <div className="form-container">
-      <h2>React Form Example</h2>
+      <h2>Bangalore One Cargo Quotation</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -167,6 +283,46 @@ pdf.text(`DATE OF MOVING: ${formData.dateOfoPacking}`, 108, 66.5);
             id="dateOfoPacking"
             name="dateOfoPacking"
             value={formData.dateOfoPacking}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="from">Transport Charges Part Load:</label>
+          <input
+            type="text"
+            id="transportChrPart"
+            name="transportChrPart"
+            value={formData.transportChrPart}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="from">Transport Charges Full Load:</label>
+          <input
+            type="text"
+            id="transportChrFull"
+            name="transportChrFull"
+            value={formData.transportChrFull}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="from">CAR/BIKE Charges Part Load:</label>
+          <input
+            type="text"
+            id="carChrPart"
+            name="carChrPart"
+            value={formData.carChrPart}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="from">CAR/BIKE Charges Full Load:</label>
+          <input
+            type="text"
+            id="carChrFull"
+            name="carChrFull"
+            value={formData.carChrFull}
             onChange={handleInputChange}
           />
         </div>
