@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
-import './Form.css';
-import jsPDF from 'jspdf';
+import React, { useState } from "react";
+import "./Form.css";
+import jsPDF from "jspdf";
 
-import Logo from './logo.png'; // Import your logo image
-import SupportLogo from'./support-logo.png';
+import Logo from "./logo.png"; // Import your logo image
+import SupportLogo from "./support-logo.png";
 
-
-import resix from'./Images/resix.png';
-import Signature from'./Images/signature.png';
+import resix from "./Images/resix.png";
+import Signature from "./Images/signature.png";
 
 const Form = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    mobile: '',
-    address: '',
-    email: '',
+    name: "",
+    mobile: "",
+    address: "",
+    email: "",
   });
-
-
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -26,330 +23,402 @@ const Form = () => {
       [name]: value,
     }));
   };
-  let count = 0 ;
+  let count = 0;
   const handleSubmit = (event) => {
     count = count + 1;
 
     event.preventDefault();
-    console.log('Form data submitted:', formData);
+    console.log("Form data submitted:", formData);
     generatePDF(count);
   };
 
   const generatePDF = (count) => {
     const pdf = new jsPDF();
-    pdf.setFont('helvetica', 'normal');
+    pdf.setFont("helvetica", "normal");
     pdf.setFontSize(14);
 
-
-    pdf.addImage(Logo, 'PNG', 15, 5, 80, 20);
+    pdf.addImage(Logo, "PNG", 15, 5, 80, 20);
     pdf.setFontSize(8);
-    pdf.text(12, 30, 'No. 320,10th cross NGR Layout, Masjid Road,Roopena Agrahara, Bangalore - 560068')
-    pdf.text(12, 34, 'E-Mail :bangaloreonecargo@gmail.com             Web : www.bangaloreonecargo.com')
+    pdf.text(
+      12,
+      30,
+      "No. 320,10th cross NGR Layout, Masjid Road,Roopena Agrahara, Bangalore - 560068"
+    );
+    pdf.text(
+      12,
+      34,
+      "E-Mail :bangaloreonecargo@gmail.com             Web : www.bangaloreonecargo.com"
+    );
     pdf.setFontSize(10);
-    pdf.setFont(undefined,'bold')
-    
-    pdf.text(130, 14, 'GST : 29APVPT9158A1Z3')
-    pdf.text(130, 18, 'QUOTATION FOR PACKERS AND MOVERS')
- 
-
-pdf.setFillColor(255, 0, 0); // Red color
-
-// Add a filled rectangular box to the PDF
-pdf.rect(130, 22, 26, 10, 'F'); // 'F' stands for 'Fill'
-
-// Set text color to white
-pdf.setTextColor(255, 255, 255); // White color
-pdf.text(`CUSTOMER`, 133, 26.5);
-pdf.text(`HELPLINE`, 134.5, 30.5);
-
-
-
-pdf.setTextColor(0,0,0);
-pdf.setFontSize(10);
-pdf.setFont(undefined,'none')
-pdf.text(156, 26, ' 99644 76742')
-pdf.text(156, 30, ' 99644 76742')
-pdf.addImage(SupportLogo, 'PNG', 176, 21, 15, 10);
-
-//input
-pdf.rect(12, 41, 95, 7);
-pdf.text(`NAME: ${formData.name}`, 13, 45, { align: "left" });
-pdf.rect(12, 48, 95, 7);
-pdf.text(`NUMBER: ${formData.mobile}`, 13, 52.5, { align: "left" });
-pdf.rect(12, 55, 95, 14);
-pdf.text(`ADDRESS: ${formData.address}`, 13, 59.5, { align: "left" });
-pdf.rect(107, 41, 38, 7);
-pdf.text(`QUOTATION NO: ${count}`, 108, 45.4, { align: "left" });
-
-const currentDate = new Date().toLocaleDateString();
-pdf.rect(145, 41, 45, 7,); 
-pdf.text(`DATE: ${currentDate}`, 150, 45.4);
-
-pdf.rect(107, 48, 83, 7,); 
-pdf.text(`FROM: ${formData.from}`, 108, 52.5);
-
-pdf.rect(107, 55, 83, 7,); 
-pdf.text(`TO: ${formData.toLocation}`, 108, 59.5);
-
-pdf.rect(107, 62, 83, 7,); 
-pdf.text(`DATE OF MOVING: ${formData.dateOfoPacking}`, 108, 66.5);
-
-//end of first layer
-
-//second layer
-pdf.setFontSize(8);
-pdf.text(12, 75, 'Dear Sir/Madam')
-pdf.text(12, 78, 'We thank you for your valueable enquiry for Packing & Moving of your Office/House Articles On')
-pdf.text(12, 81, 'Door to Door basis.We are in pleasure to Quote our reasonable charges as hereunder')
-
-pdf.setFontSize(12);
-pdf.setFillColor(255, 0, 0);
-pdf.rect(12, 87, 150, 6, 'F'); 
-
-pdf.setDrawColor(0, 0, 0);
-pdf.rect(12, 87, 12, 6);
-pdf.rect(24, 87, 85, 6);
-pdf.rect(109, 87, 26, 6);
-pdf.rect(135, 87, 27, 6);
-
-pdf.setTextColor(255, 255, 255);
-pdf.text(`Sl no`, 12.5, 91);
-pdf.text(`Particulars`, 54.5, 91);
-pdf.text(`Part Load`, 112.5, 91);
-pdf.text(`Full Load`, 138.5, 91);
-
-//line1 
-pdf.rect(12, 93, 12, 6);
-pdf.rect(24, 93, 85, 6);
-pdf.rect(109, 93, 26, 6);
-pdf.rect(135, 93, 27, 6);
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`1`, 17, 97);
-pdf.text(`Transportation charges-(Door to Door /Gdn to Gdn)`, 25, 97);
-pdf.text(`${formData.transportChrPart}`, 116.5, 97);
-pdf.text(`${formData.transportChrFull}`, 142.5, 97);
-
-let incFull;
-let incPart;
-
-
-if(formData.transportChrPart !== ""){
-  incPart = "Included";
-
-
-}
-else{
-  incPart = "";
- 
-}
-if(formData.transportChrFull !== ""){
-  incFull = "Included";
-  
-
-}
-else{
-  incFull = "";
-
-}
-
-//line2 
-pdf.rect(12, 99, 12, 6);
-pdf.rect(24, 99, 85, 6);
-pdf.rect(109, 99, 26, 6);
-pdf.rect(135, 99, 27, 6);
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`2`, 17, 103);
-pdf.text(`Packing charges - Using Quality packing materials`, 25, 103);
-pdf.text(`${incPart}`, 116.5, 103);
-pdf.text(`${incFull}`, 142.5, 103);
-
-
-
-//line3
-pdf.rect(12, 105,12, 6);
-pdf.rect(24, 105,85, 6);
-pdf.rect(109,105, 26, 6);
-pdf.rect(135,105, 27, 6);
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`3`, 17, 109);
-pdf.text(`Unacking charges - Using Quality packing materials`, 25, 109);
-pdf.text(`${incPart}`, 116.5, 109);
-pdf.text(`${incFull}`, 142.5, 109);
-
-//line4
-pdf.rect(12, 111,12, 6);
-pdf.rect(24, 111,85, 6);
-pdf.rect(109,111, 26, 6);
-pdf.rect(135,111, 27, 6);
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`4`, 17, 115);
-pdf.text(`Loading Charges & Unloading Charges`, 25, 115);
-pdf.text(`${incPart}`, 116.5, 115);
-pdf.text(`${incFull}`, 142.5, 115);
-
-//line5
-pdf.rect(12, 117,12, 6);
-pdf.rect(24, 117,85, 6);
-pdf.rect(109,117, 26, 6);
-pdf.rect(135,117, 27, 6);
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`5`, 17, 121);
-pdf.text(`Car/Bike Transportation with Loading & Unloading`, 25, 121);
-pdf.text(`${formData.carChrPart}`, 116.5, 121);
-pdf.text(`${formData.carChrFull}`, 142.5, 121);
-
-//line6 Storage
-pdf.rect(12, 123,12, 6);
-pdf.rect(24, 123,85, 6);
-pdf.rect(109,123, 53, 6);
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`6`, 17, 127);
-pdf.text(`Storage Chrages ${formData.storageCharges} for ${formData.storageDays} day`, 25, 127);
-
-let storageTotal = formData.storageCharges * formData.storageDays
-
-pdf.text(`${storageTotal}`, 116.5, 127);
-
-//line7 
-pdf.rect(12, 129,12, 6);
-pdf.rect(24, 129,85, 6);
-pdf.rect(109,129, 26, 6);
-pdf.rect(135,129, 27, 6);
-
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`7`, 17, 133);
-pdf.text(`Insurance-Carrier Risk @ 3% or Transit Risk @ 1.5% `, 25, 133);
-pdf.text(`500`, 116.5, 133);
-pdf.text(`500`, 142.5, 133);
-
-
-//line8 GST
-pdf.rect(12, 135,12, 6);
-pdf.rect(24, 135,85, 6);
-pdf.rect(109,135, 26, 6);
-pdf.rect(135,135, 27, 6);
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(10);
-pdf.text(`8`, 17, 139);
-pdf.text(`GST at ${formData.gst} %`, 25, 139);
-
-let transCarPartTotal = parseInt(formData.transportChrPart, 10) + parseInt(formData.carChrPart, 10);
-let partTotalMulti = (transCarPartTotal * formData.gst);
-let gstAmountPart = partTotalMulti / 100;
-
-let transCarFullTotal = parseInt(formData.transportChrFull, 10) + parseInt(formData.carChrFull, 10);
-let fullTotalMulti = (transCarFullTotal * formData.gst);
-let gstAmountFull = fullTotalMulti / 100;
-
-pdf.text(`${gstAmountPart}`, 116.5, 139);
-pdf.text(`${gstAmountFull}`, 142.5, 139);
-
-
-//line9 Grand Total
-pdf.rect(12, 141,97, 8);
-pdf.rect(109,141, 26, 8);
-pdf.rect(135,141, 27, 8);
-
-
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(14);
-pdf.text(`Grand Total `, 82, 146.5);
-pdf.text(`500`, 116.5, 146.5);
-pdf.text(`500`, 142.5, 146.5);
-
-
-if (incFull || incPart !== "included") {
-  pdf.rect(12, 150, 75, 8);
-  pdf.rect(87, 150, 75, 8);
-  pdf.setTextColor(0, 0, 0);
-  pdf.setFontSize(12);
-  pdf.text(`Loading Point ${formData.loadPointFloor}th floor Lift ${formData.loadPointLift} `, 13, 155);
-  pdf.text(`Unloading Point ${formData.unloadPointFloor}th floor Lift ${formData.unloadPointLift} `, 88, 155);
-} else {
-  // Do nothing or handle the false case as needed
-}
-
-pdf.rect(12,158, 75, 8);
-pdf.text(`Advance Paid ${formData.advanceAmount}`, 13, 163);
-
-//terms and conditions
-pdf.setFillColor(255, 0, 0);
-pdf.rect(12,170, 75, 4, 'F');
-pdf.rect(12,170, 75, 4);
-
-pdf.setFontSize(10);
-pdf.setTextColor(255, 255, 255);
-
-pdf.text(`Terms and Condition`, 33, 173);
-pdf.setTextColor(0, 0,0);
-pdf.setFontSize(8);
-
-pdf.text(`1.GST will be extra as per government rule.`, 13, 180);
-pdf.text(`2.The carrier or the Agent shall be exempted from any loss or damage through accident, pilferage, fire, rain, collision, any other `, 13, 183);
-pdf.text(` road hazard. We there recommend that goods be insured. No individual policy/receipt from insurance company will be given.`, 15, 185.5);
-pdf.text(`3.We request you to pay us 15% of all charges in advance along with your order and the balance on completion of the packing at  `, 13, 188);
-pdf.text(` loading point. All payments are to be cleaned before delivery.`, 15, 190.5);
-pdf.text(`4.All payment in favour of M/s. BANGALORE ONE CARGO. All disputes subject to BANGALORE Jurisdiction only.`, 13, 193);
-pdf.text(`5.All claims will be settled by the Insurance Company. In case of any claims, intimate letter for Insurancecomapny must be given in`, 13, 196);
-pdf.text(` writing & the same will be intimated to you within 2 working days, in written or by mail.`, 15, 198.5);
-pdf.text(`6.In case of any breakdown of vehicle, the company might tranship the consignment as the need may arise.`, 13, 201);
-pdf.text(`7.We do not under take Electrical,Carpentry & Plumber works,We will provide on the basis of availability and will be charged extra.`, 13, 204);
-pdf.text(`8.We do not undertake responsibility of Flower Pots,Plants,Gas Cylinder,Inflammable items and prohibited liquid items .`, 13, 207);
-pdf.text(`9.All packing materials must be returned on the same day. There's a Rs. 500.00 charge for materials collected on the following day. `, 13, 210);
-pdf.text(` If you request our packing team to return the next day for your convenience,you'll be covering all associated expenses.`, 15, 212.5);
-pdf.text(`10.For Kerala state there is no unloading and unpacking Included `, 13, 215);
-pdf.text(`11.Amounts below 2000 are due in full at the loading point. For amounts above 2000, it's 80% at loading and 20% at unloading.`, 13, 218);
-
-pdf.setFontSize(10);
-pdf.setTextColor(255, 0, 0);
-
-
-pdf.text(`Please Keep Your Cash/Jewellery, Mobile Phones,Credit Cards and Important Documentsin your Safe Custody/Locker `, 15, 230);
-pdf.text(`We are not Responsible for any kind of Loss`, 62, 234);
-pdf.line(15, 238, 184, 238); // horizontal line    
-pdf.setLineWidth(0.5); 
-pdf.setTextColor(0, 0, 0);
-pdf.setFontSize(12);
-pdf.text(`Thanking you and awatingfor your valued work order to serve you.`, 42, 242);
-pdf.setFontSize(14);
-
-pdf.setTextColor(255, 0,0);
-pdf.text(`BANGALORE ONE CARGO`, 28, 260);
-pdf.addImage(Signature, 'PNG', 38, 262, 28, 10);
-
-pdf.setTextColor(0, 0,0);
-pdf.setFontSize(8);
-pdf.text(`Signature- Marketing Executive`, 38, 275);
-
-pdf.setFontSize(16);
-
-
-pdf.setTextColor(255,255,255);
-pdf.setFillColor(255, 0, 0);
-pdf.rect(12, 280, 185, 8, 'F'); 
-pdf.text(`DOOR TO DOOR SERVICE ALL OVER INDIA`, 46, 286);
-
-//images
-pdf.addImage(resix, 'PNG', 165, 80, 38, 140);
-
-
-
-    pdf.save('formData.pdf');
+    pdf.setFont(undefined, "bold");
+
+    pdf.text(130, 14, "GST : 29APVPT9158A1Z3");
+    pdf.text(130, 18, "QUOTATION FOR PACKERS AND MOVERS");
+
+    pdf.setFillColor(255, 0, 0); // Red color
+
+    // Add a filled rectangular box to the PDF
+    pdf.rect(130, 22, 26, 10, "F"); // 'F' stands for 'Fill'
+
+    // Set text color to white
+    pdf.setTextColor(255, 255, 255); // White color
+    pdf.text(`CUSTOMER`, 133, 26.5);
+    pdf.text(`HELPLINE`, 134.5, 30.5);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.setFont(undefined, "none");
+    pdf.text(156, 26, " 99644 76742");
+    pdf.text(156, 30, " 99644 76742");
+    pdf.addImage(SupportLogo, "PNG", 176, 21, 15, 10);
+
+    //input
+    pdf.rect(12, 41, 95, 7);
+    pdf.text(`NAME: ${formData.name}`, 13, 45, { align: "left" });
+    pdf.rect(12, 48, 95, 7);
+    pdf.text(`NUMBER: ${formData.mobile}`, 13, 52.5, { align: "left" });
+    pdf.rect(12, 55, 95, 14);
+    pdf.text(`ADDRESS: ${formData.address}`, 13, 59.5, { align: "left" });
+    pdf.rect(107, 41, 38, 7);
+    pdf.text(`QUOTATION NO: ${count}`, 108, 45.4, { align: "left" });
+
+    const currentDate = new Date().toLocaleDateString();
+    pdf.rect(145, 41, 45, 7);
+    pdf.text(`DATE: ${currentDate}`, 150, 45.4);
+
+    pdf.rect(107, 48, 83, 7);
+    pdf.text(`FROM: ${formData.from}`, 108, 52.5);
+
+    pdf.rect(107, 55, 83, 7);
+    pdf.text(`TO: ${formData.toLocation}`, 108, 59.5);
+
+    pdf.rect(107, 62, 83, 7);
+    pdf.text(`DATE OF MOVING: ${formData.dateOfoPacking}`, 108, 66.5);
+
+    //end of first layer
+
+    //second layer
+    pdf.setFontSize(8);
+    pdf.text(12, 75, "Dear Sir/Madam");
+    pdf.text(
+      12,
+      78,
+      "We thank you for your valueable enquiry for Packing & Moving of your Office/House Articles On"
+    );
+    pdf.text(
+      12,
+      81,
+      "Door to Door basis.We are in pleasure to Quote our reasonable charges as hereunder"
+    );
+
+    pdf.setFontSize(12);
+    pdf.setFillColor(255, 0, 0);
+    pdf.rect(12, 87, 150, 6, "F");
+
+    pdf.setDrawColor(0, 0, 0);
+    pdf.rect(12, 87, 12, 6);
+    pdf.rect(24, 87, 85, 6);
+    pdf.rect(109, 87, 26, 6);
+    pdf.rect(135, 87, 27, 6);
+
+    pdf.setTextColor(255, 255, 255);
+    pdf.text(`Sl no`, 12.5, 91);
+    pdf.text(`Particulars`, 54.5, 91);
+    pdf.text(`Part Load`, 112.5, 91);
+    pdf.text(`Full Load`, 138.5, 91);
+
+    //line1
+    pdf.rect(12, 93, 12, 6);
+    pdf.rect(24, 93, 85, 6);
+    pdf.rect(109, 93, 26, 6);
+    pdf.rect(135, 93, 27, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`1`, 17, 97);
+    pdf.text(`Transportation charges-(Door to Door /Gdn to Gdn)`, 25, 97);
+    pdf.text(`${formData.transportChrPart}`, 116.5, 97);
+    pdf.text(`${formData.transportChrFull}`, 142.5, 97);
+
+    let incFull;
+    let incPart;
+
+    if (formData.transportChrPart !== "") {
+      incPart = "Included";
+    } else {
+      incPart = "";
+    }
+    if (formData.transportChrFull !== "") {
+      incFull = "Included";
+    } else {
+      incFull = "";
+    }
+
+    //line2
+    pdf.rect(12, 99, 12, 6);
+    pdf.rect(24, 99, 85, 6);
+    pdf.rect(109, 99, 26, 6);
+    pdf.rect(135, 99, 27, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`2`, 17, 103);
+    pdf.text(`Packing charges - Using Quality packing materials`, 25, 103);
+    pdf.text(`${incPart}`, 116.5, 103);
+    pdf.text(`${incFull}`, 142.5, 103);
+
+    //line3
+    pdf.rect(12, 105, 12, 6);
+    pdf.rect(24, 105, 85, 6);
+    pdf.rect(109, 105, 26, 6);
+    pdf.rect(135, 105, 27, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`3`, 17, 109);
+    pdf.text(`Unacking charges - Using Quality packing materials`, 25, 109);
+    pdf.text(`${incPart}`, 116.5, 109);
+    pdf.text(`${incFull}`, 142.5, 109);
+
+    //line4
+    pdf.rect(12, 111, 12, 6);
+    pdf.rect(24, 111, 85, 6);
+    pdf.rect(109, 111, 26, 6);
+    pdf.rect(135, 111, 27, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`4`, 17, 115);
+    pdf.text(`Loading Charges & Unloading Charges`, 25, 115);
+    pdf.text(`${incPart}`, 116.5, 115);
+    pdf.text(`${incFull}`, 142.5, 115);
+
+    //line5
+    pdf.rect(12, 117, 12, 6);
+    pdf.rect(24, 117, 85, 6);
+    pdf.rect(109, 117, 26, 6);
+    pdf.rect(135, 117, 27, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`5`, 17, 121);
+    pdf.text(`Car/Bike Transportation with Loading & Unloading`, 25, 121);
+    pdf.text(`${formData.carChrPart}`, 116.5, 121);
+    pdf.text(`${formData.carChrFull}`, 142.5, 121);
+
+    //line6 Storage
+    pdf.rect(12, 123, 12, 6);
+    pdf.rect(24, 123, 85, 6);
+    pdf.rect(109, 123, 53, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`6`, 17, 127);
+    pdf.text(
+      `Storage Chrages ${formData.storageCharges} for ${formData.storageDays} day`,
+      25,
+      127
+    );
+
+    let storageTotal = formData.storageCharges * formData.storageDays;
+
+    pdf.text(`${storageTotal}`, 116.5, 127);
+
+    //line7
+    pdf.rect(12, 129, 12, 6);
+    pdf.rect(24, 129, 85, 6);
+    pdf.rect(109, 129, 26, 6);
+    pdf.rect(135, 129, 27, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`7`, 17, 133);
+    pdf.text(`Insurance-Carrier Risk @ 3% or Transit Risk @ 1.5% `, 25, 133);
+    pdf.text(`500`, 116.5, 133);
+    pdf.text(`500`, 142.5, 133);
+
+    //line8 GST
+    pdf.rect(12, 135, 12, 6);
+    pdf.rect(24, 135, 85, 6);
+    pdf.rect(109, 135, 26, 6);
+    pdf.rect(135, 135, 27, 6);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(10);
+    pdf.text(`8`, 17, 139);
+    pdf.text(`GST at ${formData.gst} %`, 25, 139);
+
+    let transCarPartTotal =
+      parseInt(formData.transportChrPart, 10) +
+      parseInt(formData.carChrPart, 10);
+    let partTotalMulti = transCarPartTotal * formData.gst;
+    let gstAmountPart = partTotalMulti / 100;
+
+    let transCarFullTotal =
+      parseInt(formData.transportChrFull, 10) +
+      parseInt(formData.carChrFull, 10);
+    let fullTotalMulti = transCarFullTotal * formData.gst;
+    let gstAmountFull = fullTotalMulti / 100;
+
+    pdf.text(`${gstAmountPart}`, 116.5, 139);
+    pdf.text(`${gstAmountFull}`, 142.5, 139);
+
+    //line9 Grand Total
+    pdf.rect(12, 141, 97, 8);
+    pdf.rect(109, 141, 26, 8);
+    pdf.rect(135, 141, 27, 8);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(14);
+    pdf.text(`Grand Total `, 82, 146.5);
+    pdf.text(`500`, 116.5, 146.5);
+    pdf.text(`500`, 142.5, 146.5);
+
+    if (incFull || incPart !== "included") {
+      pdf.rect(12, 150, 75, 8);
+      pdf.rect(87, 150, 75, 8);
+      pdf.setTextColor(0, 0, 0);
+      pdf.setFontSize(10);
+      pdf.text(
+        `Loading Point ${formData.loadPointFloor} floor Lift ${formData.loadPointLift} `,
+        13,
+        155
+      );
+      pdf.text(
+        `Unloading Point ${formData.unloadPointFloor} floor Lift ${formData.unloadPointLift} `,
+        88,
+        155
+      );
+    } else {
+      // Do nothing or handle the false case as needed
+    }
+
+    pdf.rect(12, 158, 75, 8);
+    pdf.text(`Advance Paid ${formData.advanceAmount}`, 13, 163);
+
+    //terms and conditions
+    pdf.setFillColor(255, 0, 0);
+    pdf.rect(12, 170, 75, 4, "F");
+    pdf.rect(12, 170, 75, 4);
+
+    pdf.setFontSize(10);
+    pdf.setTextColor(255, 255, 255);
+
+    pdf.text(`Terms and Condition`, 33, 173);
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(8);
+
+    pdf.text(`1.GST will be extra as per government rule.`, 13, 180);
+    pdf.text(
+      `2.The carrier or the Agent shall be exempted from any loss or damage through accident, pilferage, fire, rain, collision, any other `,
+      13,
+      183
+    );
+    pdf.text(
+      ` road hazard. We there recommend that goods be insured. No individual policy/receipt from insurance company will be given.`,
+      15,
+      185.5
+    );
+    pdf.text(
+      `3.We request you to pay us 15% of all charges in advance along with your order and the balance on completion of the packing at  `,
+      13,
+      188
+    );
+    pdf.text(
+      ` loading point. All payments are to be cleaned before delivery.`,
+      15,
+      190.5
+    );
+    pdf.text(
+      `4.All payment in favour of M/s. BANGALORE ONE CARGO. All disputes subject to BANGALORE Jurisdiction only.`,
+      13,
+      193
+    );
+    pdf.text(
+      `5.All claims will be settled by the Insurance Company. In case of any claims, intimate letter for Insurancecomapny must be given in`,
+      13,
+      196
+    );
+    pdf.text(
+      ` writing & the same will be intimated to you within 2 working days, in written or by mail.`,
+      15,
+      198.5
+    );
+    pdf.text(
+      `6.In case of any breakdown of vehicle, the company might tranship the consignment as the need may arise.`,
+      13,
+      201
+    );
+    pdf.text(
+      `7.We do not under take Electrical,Carpentry & Plumber works,We will provide on the basis of availability and will be charged extra.`,
+      13,
+      204
+    );
+    pdf.text(
+      `8.We do not undertake responsibility of Flower Pots,Plants,Gas Cylinder,Inflammable items and prohibited liquid items .`,
+      13,
+      207
+    );
+    pdf.text(
+      `9.All packing materials must be returned on the same day. There's a Rs. 500.00 charge for materials collected on the following day. `,
+      13,
+      210
+    );
+    pdf.text(
+      ` If you request our packing team to return the next day for your convenience,you'll be covering all associated expenses.`,
+      15,
+      212.5
+    );
+    pdf.text(
+      `10.For Kerala state there is no unloading and unpacking Included `,
+      13,
+      215
+    );
+    pdf.text(
+      `11.Amounts below 2000 are due in full at the loading point. For amounts above 2000, it's 80% at loading and 20% at unloading.`,
+      13,
+      218
+    );
+
+    pdf.setFontSize(10);
+    pdf.setTextColor(255, 0, 0);
+
+    pdf.text(
+      `Please Keep Your Cash/Jewellery, Mobile Phones,Credit Cards and Important Documentsin your Safe Custody/Locker `,
+      15,
+      230
+    );
+    pdf.text(`We are not Responsible for any kind of Loss`, 62, 234);
+    pdf.line(15, 238, 184, 238); // horizontal line
+    pdf.setLineWidth(0.5);
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(12);
+    pdf.text(
+      `Thanking you and awatingfor your valued work order to serve you.`,
+      42,
+      242
+    );
+    pdf.setFontSize(14);
+
+    pdf.setTextColor(255, 0, 0);
+    pdf.text(`BANGALORE ONE CARGO`, 28, 260);
+    pdf.addImage(Signature, "PNG", 38, 262, 28, 10);
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(8);
+    pdf.text(`Signature- Marketing Executive`, 38, 275);
+
+    pdf.setFontSize(16);
+
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFillColor(255, 0, 0);
+    pdf.rect(12, 280, 185, 8, "F");
+    pdf.text(`DOOR TO DOOR SERVICE ALL OVER INDIA`, 46, 286);
+
+    //images
+    pdf.addImage(resix, "PNG", 165, 80, 38, 140);
+
+    pdf.save("formData.pdf");
   };
 
   return (
@@ -376,121 +445,179 @@ pdf.addImage(resix, 'PNG', 165, 80, 38, 140);
             onChange={handleInputChange}
           />
         </div>
+        <div className="display-inline">
+          <div className="form-group">
+            <label htmlFor="mobile">Mobile:</label>
+            <input
+              className="input margin"
+              type="text"
+              id="mobile"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="from">Date of packing:</label>
+            <input
+              type="date"
+              className="input"
+              id="dateOfoPacking"
+              name="dateOfoPacking"
+              value={formData.dateOfoPacking}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="display-inline">
+          <div className="form-group">
+            <label htmlFor="from">From Location:</label>
+            <input
+            className="input margin"
+              type="text"
+              id="from"
+              name="from"
+              value={formData.from}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="from">To Location:</label>
+            <input
+              type="text"
+              id="toLocation"
+              name="toLocation"
+              value={formData.toLocation}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="display-inline">
+          <div className="form-group">
+            <label htmlFor="from">Part Load Amount:</label>
+            <input
+              className="input margin"
+              type="text"
+              id="transportChrPart"
+              name="transportChrPart"
+              value={formData.transportChrPart}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="from">Full Load Amount:</label>
+            <input
+              type="text"
+            
+              id="transportChrFull"
+              name="transportChrFull"
+              value={formData.transportChrFull}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+
+        <div className="display-inline">
+          <div className="form-group">
+            <label htmlFor="from">Loading point floor:</label>
+            <select
+              className="input margin"
+              id="loadPointFloor"
+              name="loadPointFloor"
+              value={formData.loadPointFloor}
+              onChange={handleInputChange}
+            >
+              <option>Any</option>
+              <option>Ground</option>
+              <option>1st</option>
+              <option>2nd</option>
+              <option>3rd</option>
+              <option>4th</option>
+              <option>5th</option>
+              <option>6th</option>
+              <option>7th</option>
+              <option>8th</option>
+              <option>9th</option>
+              <option>10th</option>
+              <option>11th</option>
+              <option>12th</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="from">Unloading point floor:</label>
+            <select
+              className="input"
+              id="unloadPointFloor"
+              name="unloadPointFloor"
+              value={formData.unloadPointFloor}
+              onChange={handleInputChange}
+            >
+              <option>Any</option>
+              <option>Ground</option>
+              <option>1st</option>
+              <option>2nd</option>
+              <option>3rd</option>
+              <option>4th</option>
+              <option>5th</option>
+              <option>6th</option>
+              <option>7th</option>
+              <option>8th</option>
+              <option>9th</option>
+              <option>10th</option>
+              <option>11th</option>
+              <option>12th</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="display-inline">
+        <div className="form-group">
+            <label htmlFor="from">Loading point lift:</label>
+            <select
+              className="input margin"
+              id="loadPointLift"
+              name="loadPointLift"
+              value={formData.loadPointLift}
+              onChange={handleInputChange}
+            >
+              <option>Available</option>
+              <option>Not Available</option>
+            
+            </select>
+          </div>
+        <div className="form-group">
+            <label htmlFor="from">Unloading point lift:</label>
+            <select
+              className="input"
+              id="unloadPointLift"
+              name="unloadPointLift"
+              value={formData.unloadPointLift}
+              onChange={handleInputChange}
+            >
+              <option>Available</option>
+              <option>Not Available</option>
+            
+            </select>
+          </div>
+       
+        </div>
+        <div className="display-inline">
 
         <div className="form-group">
-          <label htmlFor="mobile">Mobile:</label>
+          <label htmlFor="from">CAR/BIKE Part Load:</label>
           <input
+          
             type="text"
-            id="mobile"
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleInputChange}
-          />
-        </div>
-      
-        <div className="form-group">
-          <label htmlFor="from">From Location:</label>
-          <input
-            type="text"
-            id="from"
-            name="from"
-            value={formData.from}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">To Location:</label>
-          <input
-            type="text"
-            id="toLocation"
-            name="toLocation"
-            value={formData.toLocation}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="from">Date of packing:</label>
-          <input
-            type="date"
-            id="dateOfoPacking"
-            name="dateOfoPacking"
-            value={formData.dateOfoPacking}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">Transport Charges Part Load:</label>
-          <input
-            type="text"
-            id="transportChrPart"
-            name="transportChrPart"
-            value={formData.transportChrPart}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">Transport Charges Full Load:</label>
-          <input
-            type="text"
-            id="transportChrFull"
-            name="transportChrFull"
-            value={formData.transportChrFull}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">Loading point floor:</label>
-          <input
-            type="text"
-            id="loadPointFloor"
-            name="loadPointFloor"
-            value={formData.loadPointFloor}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">Unloading point floor:</label>
-          <input
-            type="text"
-            id="unloadPointFloor"
-            name="unloadPointFloor"
-            value={formData.unloadPointFloor}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">Loading point Lift:</label>
-          <input
-            type="text"
-            id="loadPointLift"
-            name="loadPointLift"
-            value={formData.loadPointLift}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">Unloading point Lift:</label>
-          <input
-            type="text"
-            id="unloadPointLift"
-            name="unloadPointLift"
-            value={formData.unloadPointLift}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">CAR/BIKE Charges Part Load:</label>
-          <input
-            type="text"
+            className="input margin"
             id="carChrPart"
             name="carChrPart"
             value={formData.carChrPart}
             onChange={handleInputChange}
           />
         </div>
+
         <div className="form-group">
-          <label htmlFor="from">CAR/BIKE Charges Full Load:</label>
+          <label htmlFor="from">CAR/BIKE Full Load:</label>
           <input
             type="text"
             id="carChrFull"
@@ -499,16 +626,22 @@ pdf.addImage(resix, 'PNG', 165, 80, 38, 140);
             onChange={handleInputChange}
           />
         </div>
+        </div>
+
+        <div className="display-inline">
+
         <div className="form-group">
           <label htmlFor="from">Storage Charges :</label>
           <input
             type="text"
+            className="input margin"
             id="storageCharges"
             name="storageCharges"
             value={formData.storageCharges}
             onChange={handleInputChange}
           />
         </div>
+        
         <div className="form-group">
           <label htmlFor="from">Storage Days :</label>
           <input
@@ -519,10 +652,16 @@ pdf.addImage(resix, 'PNG', 165, 80, 38, 140);
             onChange={handleInputChange}
           />
         </div>
+        </div>
+
+        <div className="display-inline">
+
         <div className="form-group">
           <label htmlFor="from">GST :</label>
           <input
+          
             type="text"
+            className="input margin"
             id="gst"
             name="gst"
             value={formData.gst}
@@ -539,8 +678,11 @@ pdf.addImage(resix, 'PNG', 165, 80, 38, 140);
             onChange={handleInputChange}
           />
         </div>
-        
-        <button type="submit" className="submit-button">Download</button>
+        </div>
+
+        <button type="submit" className="submit-button">
+          Download
+        </button>
       </form>
     </div>
   );
