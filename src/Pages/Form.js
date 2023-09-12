@@ -5,6 +5,10 @@ import jsPDF from 'jspdf';
 import Logo from './logo.png'; // Import your logo image
 import SupportLogo from'./support-logo.png';
 
+
+import resix from'./Images/resix.png';
+import Signature from'./Images/signature.png';
+
 const Form = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -46,30 +50,20 @@ const Form = () => {
     
     pdf.text(130, 14, 'GST : 29APVPT9158A1Z3')
     pdf.text(130, 18, 'QUOTATION FOR PACKERS AND MOVERS')
-    const x = 130; // X-coordinate
-     const y = 22; // Y-coordinate
-    const width = 25; // Width of the box
-    const height = 10; // Height of the box
+ 
 
-// Set the fill color to red
 pdf.setFillColor(255, 0, 0); // Red color
 
 // Add a filled rectangular box to the PDF
-pdf.rect(x, y, width, height, 'F'); // 'F' stands for 'Fill'
+pdf.rect(130, 22, 26, 10, 'F'); // 'F' stands for 'Fill'
 
 // Set text color to white
 pdf.setTextColor(255, 255, 255); // White color
+pdf.text(`CUSTOMER`, 133, 26.5);
+pdf.text(`HELPLINE`, 134.5, 30.5);
 
-// Define the text content
-const text = "SUPPORT";
 
-// Calculate the position for the text (centered inside the box)
-const textX = x + width / 2;
-console.log(textX)
-const textY = y + height / 2;
 
-// Set text alignment to center
-pdf.text(textX, textY, text, { align: "center" });  
 pdf.setTextColor(0,0,0);
 pdf.setFontSize(10);
 pdf.setFont(undefined,'none')
@@ -336,6 +330,7 @@ pdf.setFontSize(14);
 
 pdf.setTextColor(255, 0,0);
 pdf.text(`BANGALORE ONE CARGO`, 28, 260);
+pdf.addImage(Signature, 'PNG', 38, 262, 28, 10);
 
 pdf.setTextColor(0, 0,0);
 pdf.setFontSize(8);
@@ -348,6 +343,9 @@ pdf.setTextColor(255,255,255);
 pdf.setFillColor(255, 0, 0);
 pdf.rect(12, 280, 185, 8, 'F'); 
 pdf.text(`DOOR TO DOOR SERVICE ALL OVER INDIA`, 46, 286);
+
+//images
+pdf.addImage(resix, 'PNG', 165, 80, 38, 140);
 
 
 
