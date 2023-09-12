@@ -75,8 +75,23 @@ input {
   }
   
   input {
-    width: 80%;
+    width: 90%;
     padding: 6px;
+  }
+
+  .input{
+    width: 140px;
+
+  }
+
+  .form-group select {
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    
   }
   
   .submit-button {
