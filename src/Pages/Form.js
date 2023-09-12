@@ -423,7 +423,7 @@ const Form = () => {
 
   return (
     <div className="form-container">
-      <h2>Bangalore One Cargo Quotation</h2>
+      <h4>Bangalore One Cargo</h4>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
