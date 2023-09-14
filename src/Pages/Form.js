@@ -29,6 +29,7 @@ const Form = () => {
     mobile: "",
     address: "",
     email: "",
+    dateOfoPacking: "",
     gst: "",
   });
 
@@ -70,6 +71,7 @@ const month = dateForCount.getMonth();
     name: "",
     mobile: "",
     address: "",
+    dateOfoPacking: "",
     email: "",})
     
     generatePDF(count);
@@ -477,9 +479,15 @@ const month = dateForCount.getMonth();
     pdf.text(`DOOR TO DOOR SERVICE ALL OVER INDIA`, 46, 286);
 
     //images
-    pdf.addImage(resix, "PNG", 165, 80, 38, 140);
+    // Remove spaces and special characters from name and mobile
+const sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
+const sanitizedMobile = formData.mobile.replace(/[^0-9]/g, "");
 
-    pdf.save("formData.pdf");
+const pdfName = `${sanitizedName}_${sanitizedMobile}.pdf`;
+
+pdf.save(pdfName);
+
+    
   };
 
   return (
@@ -498,6 +506,8 @@ const month = dateForCount.getMonth();
             name="name"
             value={formData.name}
             onChange={handleInputChange}
+            required 
+            title="Please enter name"
           />
         </div>
         <div className="form-group">
@@ -532,6 +542,7 @@ const month = dateForCount.getMonth();
               name="dateOfoPacking"
               value={formData.dateOfoPacking}
               onChange={handleInputChange}
+              min={new Date().toISOString().split("T")[0]}
             />
           </div>
         </div>
