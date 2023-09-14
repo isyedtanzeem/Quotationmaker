@@ -10,10 +10,26 @@ import Signature from "./Images/signature.png";
 
 const Form = () => {
   const [formData, setFormData] = useState({
+    transportChrFull: "",
+    transportChrPart: "",
+    carChrPart: "",
+    carChrFull: "",
+    from: "",
+    toLocation:"",
+    dateOfoPacking:"",
+    loadPointFloor:"",
+    unloadPointFloor:"",
+    unloadPointLift:"",
+    loadPointLift:"",
+    advanceAmount:"",
+    storageCharges: "",
+    storageTotal: "",
+    storageDays: "",
     name: "",
     mobile: "",
     address: "",
     email: "",
+    gst: "",
   });
 
   const handleInputChange = (event) => {
@@ -23,12 +39,39 @@ const Form = () => {
       [name]: value,
     }));
   };
-  let count = 0;
-  const handleSubmit = (event) => {
-    count = count + 1;
 
+let dateForCount = new Date()
+
+console.log(dateForCount)
+
+const day = dateForCount.getDate();
+const month = dateForCount.getMonth();
+
+  let count = day + month ;
+
+  const handleSubmit = (event) => {
+    count = count + 366;
     event.preventDefault();
-    console.log("Form data submitted:", formData);
+    setFormData({  transportChrFull: "",
+    transportChrPart: "",
+    carChrPart: "",
+    carChrFull: "",
+    from: "",
+    toLocation:"",
+    dateOfoPacking:"",
+    loadPointFloor:"",
+    unloadPointFloor:"",
+    unloadPointLift:"",
+    loadPointLift:"",
+    advanceAmount:"",
+    storageCharges: "",
+    storageTotal: "",
+    storageDays: "",
+    name: "",
+    mobile: "",
+    address: "",
+    email: "",})
+    
     generatePDF(count);
   };
 
@@ -140,6 +183,8 @@ const Form = () => {
     pdf.text(`${formData.transportChrPart}`, 116.5, 97);
     pdf.text(`${formData.transportChrFull}`, 142.5, 97);
 
+    console.log(formData.transportChrPart," ",formData.transportChrFull)
+
     let incFull;
     let incPart;
 
@@ -219,10 +264,17 @@ const Form = () => {
       25,
       127
     );
+   
+    
+    let storageTotal = parseInt(formData.storageCharges) * parseInt(formData.storageDays);
 
-    let storageTotal = formData.storageCharges * formData.storageDays;
+    if (isNaN(storageTotal)) {
+      storageTotal = "";
+    }
 
-    pdf.text(`${storageTotal}`, 116.5, 127);
+ console.log(storageTotal)
+
+    pdf.text(`${ storageTotal}`, 116.5, 127);
 
     //line7
     pdf.rect(12, 129, 12, 6);
@@ -259,9 +311,15 @@ const Form = () => {
       parseInt(formData.carChrFull, 10);
     let fullTotalMulti = transCarFullTotal * formData.gst;
     let gstAmountFull = fullTotalMulti / 100;
-
+    if (isNaN(gstAmountPart)) {
+      gstAmountPart = "";
+    }
+    if (isNaN(gstAmountFull)) {
+      gstAmountFull = "";
+    }
     pdf.text(`${gstAmountPart}`, 116.5, 139);
     pdf.text(`${gstAmountFull}`, 142.5, 139);
+   
 
     //line9 Grand Total
     pdf.rect(12, 141, 97, 8);
@@ -271,8 +329,11 @@ const Form = () => {
     pdf.setTextColor(0, 0, 0);
     pdf.setFontSize(14);
     pdf.text(`Grand Total `, 82, 146.5);
-    pdf.text(`500`, 116.5, 146.5);
-    pdf.text(`500`, 142.5, 146.5);
+
+    let partGrandTotal = formData.transportChrPart + formData.carChrPart + gstAmountPart + storageTotal ;
+    let fullGrandTotal = formData.transportChrFull + formData.carChrPart + gstAmountPart ;
+    pdf.text(`${partGrandTotal}`, 116.5, 146.5);
+    pdf.text(`${fullGrandTotal}`, 142.5, 146.5);
 
     if (incFull || incPart !== "included") {
       pdf.rect(12, 150, 75, 8);
@@ -425,10 +486,14 @@ const Form = () => {
     <div className="form-container">
       <h4>Bangalore One Cargo</h4>
       <form onSubmit={handleSubmit}>
+      <div className="display-inline">
+
         <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
+            className="input margin"
+
             id="name"
             name="name"
             value={formData.name}
@@ -444,6 +509,7 @@ const Form = () => {
             value={formData.address}
             onChange={handleInputChange}
           />
+        </div>
         </div>
         <div className="display-inline">
           <div className="form-group">
@@ -516,7 +582,8 @@ const Form = () => {
             />
           </div>
         </div>
-
+{formData.transportChrFull || formData.transportChrPart  != "" ?
+  <div>
         <div className="display-inline">
           <div className="form-group">
             <label htmlFor="from">Loading point floor:</label>
@@ -599,8 +666,11 @@ const Form = () => {
             
             </select>
           </div>
-       
+        
         </div>
+        </div>
+: ""
+        }
         <div className="display-inline">
 
         <div className="form-group">
