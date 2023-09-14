@@ -96,5 +96,6 @@ input {
   
   .submit-button {
     padding: 8px 16px;
+    max-width: 100px;
   }
 }
