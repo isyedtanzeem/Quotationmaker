@@ -479,6 +479,8 @@ const month = dateForCount.getMonth();
     pdf.text(`DOOR TO DOOR SERVICE ALL OVER INDIA`, 46, 286);
 
     //images
+    pdf.addImage(resix, "PNG", 165, 80, 38, 140);
+
     // Remove spaces and special characters from name and mobile
 const sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
 const sanitizedMobile = formData.mobile.replace(/[^0-9]/g, "");
