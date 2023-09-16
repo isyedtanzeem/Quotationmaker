@@ -410,12 +410,12 @@ const month = dateForCount.getMonth();
       185.5
     );
     pdf.text(
-      `3.We request you to pay us 15% of all charges in advance along with your order and the balance on completion of the packing at  `,
+      `3.The full payment is due at the loading point. This means that if the total amount is less than 20000 , the customer must pay the entire`,
       13,
       188
     );
     pdf.text(
-      ` loading point. All payments are to be cleaned before delivery.`,
+      ` amount before or during the loading process.`,
       15,
       190.5
     );
@@ -465,15 +465,11 @@ const month = dateForCount.getMonth();
       215
     );
     pdf.text(
-      `11.Amounts below 20000 are due in full at the loading point. For amounts above 20000, it's 80% at loading and 20% at unloading.`,
+      `11.An additional documentation charge of Rs.200 will be applied upon successful delivery and must be paid by the customer.`,
       13,
       218
     );
-    pdf.text(
-      `12.An additional documentation charge of Rs.200 will be applied upon successful delivery and must be paid by the customer.`,
-      13,
-      221
-    );
+  
 
     pdf.setFontSize(10);
     pdf.setTextColor(0,63,171);
