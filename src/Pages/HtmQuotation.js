@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import "./Form.css";
 import jsPDF from "jspdf";
 
-import Logo from "./logo.png"; // Import your logo image
+import Logo from "./Images/HtmLogo.png"; // Import your logo image
 import SupportLogo from "./support-logo.png";
 
-import resix from "./Images/resix.png";
+import resix from "./Images/htmResix.png";
 import Signature from "./Images/signature.png";
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 
 
-const Form = () => {
+const HtmQuotation = () => {
   const [formData, setFormData] = useState({
     transportChrFull: "",
     transportChrPart: "",
@@ -87,7 +87,7 @@ const month = dateForCount.getMonth();
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(14);
 
-    pdf.addImage(Logo, "PNG", 15, 5, 80, 20);
+    pdf.addImage(Logo, "PNG", 15, 5, 65, 20);
     pdf.setFontSize(8);
     pdf.text(
       12,
@@ -97,15 +97,15 @@ const month = dateForCount.getMonth();
     pdf.text(
       12,
       34,
-      "E-Mail :bangaloreonecargo@gmail.com             Web : www.bangaloreonecargo.com"
+      "E-Mail :htmpackersandmovers@gmail.com             Web : www.htmmovers.in"
     );
     pdf.setFontSize(10);
     pdf.setFont(undefined, "bold");
 
-    pdf.text(130, 14, "GST : 29APVPT9158A1Z3");
-    pdf.text(130, 18, "QUOTATION FOR PACKERS AND MOVERS");
+    // pdf.text(130, 14, "GST : 29APVPT9158A1Z3");
+    pdf.text(130, 18, "QUOTATION");
 
-    pdf.setFillColor(255, 0, 0); // Red color
+    pdf.setFillColor(0,63,171); // Red color
 
     // Add a filled rectangular box to the PDF
     pdf.rect(130, 22, 26, 10, "F"); // 'F' stands for 'Fill'
@@ -118,7 +118,7 @@ const month = dateForCount.getMonth();
     pdf.setTextColor(0, 0, 0);
     pdf.setFontSize(10);
     pdf.setFont(undefined, "none");
-    pdf.text(156, 26, " 99644 76742");
+    pdf.text(156, 26, " 72042 08209");
     pdf.text(156, 30, " 97412 42669");
     pdf.addImage(SupportLogo, "PNG", 176, 21, 15, 10);
 
@@ -162,7 +162,7 @@ const month = dateForCount.getMonth();
     );
 
     pdf.setFontSize(12);
-    pdf.setFillColor(255, 0, 0);
+    pdf.setFillColor(0,63,171);
     pdf.rect(12, 87, 150, 6, "F");
 
     pdf.setDrawColor(0, 0, 0);
@@ -387,7 +387,7 @@ const month = dateForCount.getMonth();
     pdf.text(`Advance Paid ${formData.advanceAmount}`, 13, 163);
 
     //terms and conditions
-    pdf.setFillColor(255, 0, 0);
+    pdf.setFillColor(0,63,171);
     pdf.rect(12, 170, 75, 4, "F");
     pdf.rect(12, 170, 75, 4);
 
@@ -420,7 +420,7 @@ const month = dateForCount.getMonth();
       190.5
     );
     pdf.text(
-      `4.All payment in favour of M/s. BANGALORE ONE CARGO. All disputes subject to BANGALORE Jurisdiction only.`,
+      `4.All payment in favour of HTM Packers and Movers. All disputes subject to BANGALORE Jurisdiction only.`,
       13,
       193
     );
@@ -476,7 +476,7 @@ const month = dateForCount.getMonth();
     );
 
     pdf.setFontSize(10);
-    pdf.setTextColor(255, 0, 0);
+    pdf.setTextColor(0,63,171);
 
     pdf.text(
       `Please Keep Your Cash/Jewellery, Mobile Phones,Credit Cards and Important Documentsin your Safe Custody/Locker `,
@@ -495,8 +495,8 @@ const month = dateForCount.getMonth();
     );
     pdf.setFontSize(14);
 
-    pdf.setTextColor(255, 0, 0);
-    pdf.text(`BANGALORE ONE CARGO`, 28, 260);
+    pdf.setTextColor(0,63,171);
+    pdf.text(`HTM Packers and Movers`, 28, 260);
     pdf.addImage(Signature, "PNG", 38, 262, 28, 10);
 
     pdf.setTextColor(0, 0, 0);
@@ -506,12 +506,12 @@ const month = dateForCount.getMonth();
     pdf.setFontSize(16);
 
     pdf.setTextColor(255, 255, 255);
-    pdf.setFillColor(255, 0, 0);
+    pdf.setFillColor(0,63,171);
     pdf.rect(12, 280, 185, 8, "F");
     pdf.text(`DOOR TO DOOR SERVICE ALL OVER INDIA`, 46, 286);
 
     //images
-    pdf.addImage(resix, "PNG", 165, 80, 38, 140);
+    pdf.addImage(resix, "PNG", 163, 80, 32, 135);
 
     // Remove spaces and special characters from name and mobile
 const sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
@@ -527,7 +527,7 @@ pdf.save(pdfName);
   return (
     <div className="form-container">
 	{/* <h4><Link to="/">Go to Home</Link></h4> */}
-      <h4>Bangalore One Cargo </h4>
+      <h4>HTM Packers and Movers </h4>
       
       <form onSubmit={handleSubmit}>
       <div className="display-inline">
@@ -807,4 +807,4 @@ pdf.save(pdfName);
   );
 };
 
-export default Form;
+export default HtmQuotation;
