@@ -398,7 +398,7 @@ const month = dateForCount.getMonth();
     pdf.setTextColor(0, 0, 0);
     pdf.setFontSize(8);
 
-    pdf.text(`1.GST will be extra as per government rule.`, 13, 180);
+    pdf.text(`1.We do not undertake responsibility of Flower Pots,Plants,Gas Cylinder,Inflammable items and prohibited liquid items.`, 13, 180);
     pdf.text(
       `2.The carrier or the Agent shall be exempted from any loss or damage through accident, pilferage, fire, rain, collision, any other `,
       13,
@@ -445,7 +445,7 @@ const month = dateForCount.getMonth();
       204
     );
     pdf.text(
-      `8.We do not undertake responsibility of Flower Pots,Plants,Gas Cylinder,Inflammable items and prohibited liquid items .`,
+      `8.GST will be extra as per government rule.`,
       13,
       207
     );
