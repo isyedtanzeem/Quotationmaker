@@ -8,9 +8,9 @@ import HtmQuotation from './Pages/HtmQuotation';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="margin-top">
         <Router>
-          <div className="App">
+          <div >
             <div>
               <NavLink
                 to="/"

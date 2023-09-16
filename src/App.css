@@ -16,6 +16,10 @@
 }
 
 .active {
-  background-color: #0b4f01;
+  background-color: #041800;
   color: #ffffff;
+}
+
+.margin-top{
+  padding-top: 10px;
 }
