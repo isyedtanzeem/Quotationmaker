@@ -11,9 +11,7 @@
   text-decoration: none;
 }
 
-.nav-button:hover {
-  background-color: #00b33c;
-}
+
 
 .active {
   background-color: #041800;
