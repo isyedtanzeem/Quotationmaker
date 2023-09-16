@@ -7,6 +7,8 @@ import SupportLogo from "./support-logo.png";
 
 import resix from "./Images/resix.png";
 import Signature from "./Images/signature.png";
+import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +45,29 @@ const Form = () => {
 
 let dateForCount = new Date()
 
-console.log(dateForCount)
+const handleClear = () => {
+  setFormData({  transportChrFull: "",
+  transportChrPart: "",
+  carChrPart: "",
+  carChrFull: "",
+  from: "",
+  toLocation:"",
+  dateOfoPacking:"",
+  loadPointFloor:"",
+  unloadPointFloor:"",
+  unloadPointLift:"",
+  loadPointLift:"",
+  advanceAmount:"",
+  storageCharges: "",
+  storageTotal: "",
+  storageDays: "",
+  name: "",
+  mobile: "",
+  address: "",
+  dateOfoPacking: "",
+  gst: "",
+  email: "",})
+}
 
 const day = dateForCount.getDate();
 const month = dateForCount.getMonth();
@@ -53,26 +77,7 @@ const month = dateForCount.getMonth();
   const handleSubmit = (event) => {
     count = count + 366;
     event.preventDefault();
-    setFormData({  transportChrFull: "",
-    transportChrPart: "",
-    carChrPart: "",
-    carChrFull: "",
-    from: "",
-    toLocation:"",
-    dateOfoPacking:"",
-    loadPointFloor:"",
-    unloadPointFloor:"",
-    unloadPointLift:"",
-    loadPointLift:"",
-    advanceAmount:"",
-    storageCharges: "",
-    storageTotal: "",
-    storageDays: "",
-    name: "",
-    mobile: "",
-    address: "",
-    dateOfoPacking: "",
-    email: "",})
+   
     
     generatePDF(count);
   };
@@ -114,7 +119,7 @@ const month = dateForCount.getMonth();
     pdf.setFontSize(10);
     pdf.setFont(undefined, "none");
     pdf.text(156, 26, " 99644 76742");
-    pdf.text(156, 30, " 99644 76742");
+    pdf.text(156, 30, " 97412 42669");
     pdf.addImage(SupportLogo, "PNG", 176, 21, 15, 10);
 
     //input
@@ -288,8 +293,8 @@ const month = dateForCount.getMonth();
     pdf.setFontSize(10);
     pdf.text(`7`, 17, 133);
     pdf.text(`Insurance-Carrier Risk @ 3% or Transit Risk @ 1.5% `, 25, 133);
-    pdf.text(`500`, 116.5, 133);
-    pdf.text(`500`, 142.5, 133);
+    // pdf.text(`500`, 116.5, 133);
+    // pdf.text(`500`, 142.5, 133);
 
     //line8 GST
     pdf.rect(12, 135, 12, 6);
@@ -303,20 +308,21 @@ const month = dateForCount.getMonth();
     pdf.text(`GST at ${formData.gst} %`, 25, 139);
 
     let transCarPartTotal =
-      parseInt(formData.transportChrPart, 10) +
-      parseInt(formData.carChrPart, 10);
+    (parseInt(formData.transportChrPart) || 0) +
+    (parseInt(formData.carChrPart) || 0) ;
     let partTotalMulti = transCarPartTotal * formData.gst;
     let gstAmountPart = partTotalMulti / 100;
 
     let transCarFullTotal =
-      parseInt(formData.transportChrFull, 10) +
-      parseInt(formData.carChrFull, 10);
+      parseInt(formData.transportChrFull || 0) +
+      parseInt(formData.carChrFull || 0);
     let fullTotalMulti = transCarFullTotal * formData.gst;
     let gstAmountFull = fullTotalMulti / 100;
-    if (isNaN(gstAmountPart)) {
+    console.log("GST",gstAmountPart)
+    if (isNaN(gstAmountPart) || gstAmountPart === 0 ) {
       gstAmountPart = "";
     }
-    if (isNaN(gstAmountFull)) {
+    if (isNaN(gstAmountFull) || gstAmountFull=== 0) {
       gstAmountFull = "";
     }
     pdf.text(`${gstAmountPart}`, 116.5, 139);
@@ -332,8 +338,29 @@ const month = dateForCount.getMonth();
     pdf.setFontSize(14);
     pdf.text(`Grand Total `, 82, 146.5);
 
-    let partGrandTotal = formData.transportChrPart + formData.carChrPart + gstAmountPart + storageTotal ;
-    let fullGrandTotal = formData.transportChrFull + formData.carChrPart + gstAmountPart ;
+
+
+    let partGrandTotal =
+    (parseInt(formData.transportChrPart) || 0) +
+    (parseInt(formData.carChrPart) || 0) +
+    (parseInt(gstAmountPart) || 0) +
+    (parseInt(storageTotal) || 0);
+  
+  console.log(partGrandTotal);
+  
+  let fullGrandTotal =
+    (parseInt(formData.transportChrFull) || 0) +
+    (parseInt(formData.carChrFull) || 0) +
+    (parseInt(gstAmountFull) || 0);
+  
+  console.log(fullGrandTotal);
+  
+    if (isNaN(partGrandTotal) || partGrandTotal=== 0) {
+      partGrandTotal = "";
+    }
+    if (isNaN(fullGrandTotal) || fullGrandTotal === 0) {
+      fullGrandTotal = "";
+    }
     pdf.text(`${partGrandTotal}`, 116.5, 146.5);
     pdf.text(`${fullGrandTotal}`, 142.5, 146.5);
 
@@ -438,9 +465,14 @@ const month = dateForCount.getMonth();
       215
     );
     pdf.text(
-      `11.Amounts below 2000 are due in full at the loading point. For amounts above 2000, it's 80% at loading and 20% at unloading.`,
+      `11.Amounts below 20000 are due in full at the loading point. For amounts above 20000, it's 80% at loading and 20% at unloading.`,
       13,
       218
+    );
+    pdf.text(
+      `12.An additional documentation charge of Rs.200 will be applied upon successful delivery and must be paid by the customer.`,
+      13,
+      221
     );
 
     pdf.setFontSize(10);
@@ -494,7 +526,9 @@ pdf.save(pdfName);
 
   return (
     <div className="form-container">
-      <h4>Bangalore One Cargo</h4>
+	<h4><Link to="/">Go to Home</Link></h4>
+      <p>Bangalore One Cargo </p>
+      
       <form onSubmit={handleSubmit}>
       <div className="display-inline">
 
@@ -742,7 +776,6 @@ pdf.save(pdfName);
         <div className="form-group">
           <label htmlFor="from">GST :</label>
           <input
-          
             type="text"
             className="input margin"
             id="gst"
@@ -763,8 +796,11 @@ pdf.save(pdfName);
         </div>
         </div>
 
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-button margin">
           Download
+        </button>
+        <button className="submit-button" onClick={handleClear}>
+         Clear
         </button>
       </form>
     </div>
