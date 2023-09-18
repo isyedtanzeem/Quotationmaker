@@ -7,23 +7,25 @@ import SupportLogo from "./support-logo.png";
 
 import resix from "./Images/resix.png";
 import Signature from "./Images/signature.png";
-import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-
-const Form = () => {
+const BocInvoice = () => {
   const [formData, setFormData] = useState({
+    dateOfoPacking: '2023-09-17',
     transportChrFull: "",
     transportChrPart: "",
     carChrPart: "",
     carChrFull: "",
     from: "",
-    toLocation:"",
-    dateOfoPacking:"",
-    loadPointFloor:"",
-    unloadPointFloor:"",
-    unloadPointLift:"",
-    loadPointLift:"",
-    advanceAmount:"",
+    toLocation: "",
+    dateOfoPacking: "",
+    loadPointFloor: "",
+    unloadPointFloor: "",
+    unloadPointLift: "",
+    loadPointLift: "",
+    advanceAmount: "",
     storageCharges: "",
     storageTotal: "",
     storageDays: "",
@@ -43,46 +45,48 @@ const Form = () => {
     }));
   };
 
-let dateForCount = new Date()
+  let dateForCount = new Date();
 
-const handleClear = () => {
-  setFormData({  transportChrFull: "",
-  transportChrPart: "",
-  carChrPart: "",
-  carChrFull: "",
-  from: "",
-  toLocation:"",
-  dateOfoPacking:"",
-  loadPointFloor:"",
-  unloadPointFloor:"",
-  unloadPointLift:"",
-  loadPointLift:"",
-  advanceAmount:"",
-  storageCharges: "",
-  storageTotal: "",
-  storageDays: "",
-  name: "",
-  mobile: "",
-  address: "",
-  dateOfoPacking: "",
-  gst: "",
-  email: "",})
-}
+  const handleClear = () => {
+    setFormData({
+      transportChrFull: "",
+      dateOfoPacking: '2023-09-17',
 
-const day = dateForCount.getDate();
+      transportChrPart: "",
+      carChrPart: "",
+      carChrFull: "",
+      from: "",
+      toLocation: "",
+      dateOfoPacking: "",
+      loadPointFloor: "",
+      unloadPointFloor: "",
+      unloadPointLift: "",
+      loadPointLift: "",
+      advanceAmount: "",
+      storageCharges: "",
+      storageTotal: "",
+      storageDays: "",
+      name: "",
+      mobile: "",
+      address: "",
+      dateOfoPacking: "",
+      gst: "",
+      email: "",
+    });
+  };
 
+  function CustomDatePicker() {
+    const [selectedDate, setSelectedDate] = useState(null);
+  const day = dateForCount.getDate();
 
-let count = day + 166;
+  let count = day + 166;
 
   const handleSubmit = (event) => {
+    count = count + 1;
 
-
-   count = count + 1;
-
-    console.log(count , "count")
+    console.log(count, "count");
     event.preventDefault();
-   
-    
+
     generatePDF(count);
   };
 
@@ -194,7 +198,6 @@ let count = day + 166;
     pdf.text(`${formData.transportChrPart}`, 116.5, 97);
     pdf.text(`${formData.transportChrFull}`, 142.5, 97);
 
-
     let incFull;
     let incPart;
 
@@ -274,17 +277,15 @@ let count = day + 166;
       25,
       127
     );
-   
-    
-    let storageTotal = parseInt(formData.storageCharges) * parseInt(formData.storageDays);
+
+    let storageTotal =
+      parseInt(formData.storageCharges) * parseInt(formData.storageDays);
 
     if (isNaN(storageTotal)) {
       storageTotal = "";
     }
 
-
-
-    pdf.text(`${ storageTotal}`, 116.5, 127);
+    pdf.text(`${storageTotal}`, 116.5, 127);
 
     //line7
     pdf.rect(12, 129, 12, 6);
@@ -311,8 +312,8 @@ let count = day + 166;
     pdf.text(`GST at ${formData.gst} %`, 25, 139);
 
     let transCarPartTotal =
-    (parseInt(formData.transportChrPart) || 0) +
-    (parseInt(formData.carChrPart) || 0) ;
+      (parseInt(formData.transportChrPart) || 0) +
+      (parseInt(formData.carChrPart) || 0);
     let partTotalMulti = transCarPartTotal * formData.gst;
     let gstAmountPart = partTotalMulti / 100;
 
@@ -322,15 +323,14 @@ let count = day + 166;
     let fullTotalMulti = transCarFullTotal * formData.gst;
     let gstAmountFull = fullTotalMulti / 100;
 
-    if (isNaN(gstAmountPart) || gstAmountPart === 0 ) {
+    if (isNaN(gstAmountPart) || gstAmountPart === 0) {
       gstAmountPart = "";
     }
-    if (isNaN(gstAmountFull) || gstAmountFull=== 0) {
+    if (isNaN(gstAmountFull) || gstAmountFull === 0) {
       gstAmountFull = "";
     }
     pdf.text(`${gstAmountPart}`, 116.5, 139);
     pdf.text(`${gstAmountFull}`, 142.5, 139);
-   
 
     //line9 Grand Total
     pdf.rect(12, 141, 97, 8);
@@ -341,23 +341,18 @@ let count = day + 166;
     pdf.setFontSize(14);
     pdf.text(`Grand Total `, 82, 146.5);
 
-
-
     let partGrandTotal =
-    (parseInt(formData.transportChrPart) || 0) +
-    (parseInt(formData.carChrPart) || 0) +
-    (parseInt(gstAmountPart) || 0) +
-    (parseInt(storageTotal) || 0);
-  
+      (parseInt(formData.transportChrPart) || 0) +
+      (parseInt(formData.carChrPart) || 0) +
+      (parseInt(gstAmountPart) || 0) +
+      (parseInt(storageTotal) || 0);
 
+    let fullGrandTotal =
+      (parseInt(formData.transportChrFull) || 0) +
+      (parseInt(formData.carChrFull) || 0) +
+      (parseInt(gstAmountFull) || 0);
 
-  let fullGrandTotal =
-    (parseInt(formData.transportChrFull) || 0) +
-    (parseInt(formData.carChrFull) || 0) +
-    (parseInt(gstAmountFull) || 0);
-
-  
-    if (isNaN(partGrandTotal) || partGrandTotal=== 0) {
+    if (isNaN(partGrandTotal) || partGrandTotal === 0) {
       partGrandTotal = "";
     }
     if (isNaN(fullGrandTotal) || fullGrandTotal === 0) {
@@ -400,7 +395,11 @@ let count = day + 166;
     pdf.setTextColor(0, 0, 0);
     pdf.setFontSize(8);
 
-    pdf.text(`1.We do not undertake responsibility of Flower Pots,Plants,Gas Cylinder,Inflammable items and prohibited liquid items.`, 13, 180);
+    pdf.text(
+      `1.We do not undertake responsibility of Flower Pots,Plants,Gas Cylinder,Inflammable items and prohibited liquid items.`,
+      13,
+      180
+    );
     pdf.text(
       `2.The carrier or the Agent shall be exempted from any loss or damage through accident, pilferage, fire, rain, collision, any other `,
       13,
@@ -416,11 +415,7 @@ let count = day + 166;
       13,
       188
     );
-    pdf.text(
-      ` amount before or during the loading process.`,
-      15,
-      190.5
-    );
+    pdf.text(` amount before or during the loading process.`, 15, 190.5);
     pdf.text(
       `4.All payment in favour of M/s. BANGALORE ONE CARGO. All disputes subject to BANGALORE Jurisdiction only.`,
       13,
@@ -446,11 +441,7 @@ let count = day + 166;
       13,
       204
     );
-    pdf.text(
-      `8.GST will be extra as per government rule.`,
-      13,
-      207
-    );
+    pdf.text(`8.GST will be extra as per government rule.`, 13, 207);
     pdf.text(
       `9.All packing materials must be returned on the same day. There's a Rs. 500.00 charge for materials collected on the following day. `,
       13,
@@ -472,7 +463,6 @@ let count = day + 166;
       13,
       218
     );
-  
 
     pdf.setFontSize(10);
     pdf.setTextColor(255, 0, 0);
@@ -513,92 +503,95 @@ let count = day + 166;
     pdf.addImage(resix, "PNG", 165, 80, 38, 140);
 
     // Remove spaces and special characters from name and mobile
-const sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
-const sanitizedMobile = formData.mobile.replace(/[^0-9]/g, "");
+    const sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
+    const sanitizedMobile = formData.mobile.replace(/[^0-9]/g, "");
 
-const pdfName = `Boc_${sanitizedName}_${sanitizedMobile}.pdf`;
+    const pdfName = `Boc_${sanitizedName}_${sanitizedMobile}.pdf`;
 
-pdf.save(pdfName);
-
-    
+    pdf.save(pdfName);
   };
 
   return (
     <div className="form-container">
-	{/* <h4><Link to="/">Go to Home</Link></h4> */}
-      <h4>Bangalore One Cargo </h4>
-      
+      {/* <h4><Link to="/">Go to Home</Link></h4> */}
+      <h4>Bangalore One Cargo Invoice</h4>
+
       <form onSubmit={handleSubmit}>
-      <div className="display-inline">
-
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            className="input margin"
-
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            required 
-            title="Please enter name"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="address">Address:</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-        </div>
+        <div className="display-inline">
+          <div className="form-group">
+            {/* <label htmlFor="name">Name:</label> */}
+            <input
+              type="text"
+              className="input margin"
+              id="name"
+              name="name"
+              value={formData.name}
+              placeholder="Name"
+              onChange={handleInputChange}
+              required
+              title="Please enter name"
+            />
+          </div>
+          <div className="form-group">
+            {/* <label htmlFor="address">Address:</label> */}
+            <input
+              type="text"
+              id="address"
+              placeholder="Address"
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
         <div className="display-inline">
           <div className="form-group">
-            <label htmlFor="mobile">Mobile:</label>
+            {/* <label htmlFor="mobile">Mobile:</label> */}
             <input
               className="input margin"
               type="text"
               id="mobile"
+              placeholder="Mobile"
               name="mobile"
               value={formData.mobile}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="from">Date of packing:</label>
+            {/* <label htmlFor="from">Date of packing:</label> */}
             <input
-              type="date"
-              className="input"
-              id="dateOfoPacking"
-              name="dateOfoPacking"
-              value={formData.dateOfoPacking}
-              onChange={handleInputChange}
-              min={new Date().toISOString().split("T")[0]}
-            />
+      type="date"
+      className="input"
+      id="dateOfoPacking"
+      name="dateOfoPacking"
+      value={formData.dateOfoPacking}
+      onChange={handleInputChange}
+      min={new Date().toISOString().split("T")[0]}
+    />
+
+
           </div>
         </div>
         <div className="display-inline">
           <div className="form-group">
-            <label htmlFor="from">From Location:</label>
+            {/* <label htmlFor="from">From Location:</label> */}
             <input
-            className="input margin"
+              className="input margin"
               type="text"
               id="from"
               name="from"
+              placeholder="From Location"
               value={formData.from}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="from">To Location:</label>
+            {/* <label htmlFor="from">To Location:</label> */}
             <input
               type="text"
               id="toLocation"
               name="toLocation"
+              placeholder="To Location"
               value={formData.toLocation}
               onChange={handleInputChange}
             />
@@ -606,204 +599,205 @@ pdf.save(pdfName);
         </div>
         <div className="display-inline">
           <div className="form-group">
-            <label htmlFor="from">Part Load Amount:</label>
+            {/* <label htmlFor="from">Part Load Amount:</label> */}
             <input
               className="input margin"
               type="text"
               id="transportChrPart"
               name="transportChrPart"
+              placeholder="Part Load Amount"
               value={formData.transportChrPart}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="from">Full Load Amount:</label>
+            {/* <label htmlFor="from">Full Load Amount:</label> */}
             <input
               type="text"
-            
               id="transportChrFull"
               name="transportChrFull"
+              placeholder="Full Load Amount"
               value={formData.transportChrFull}
               onChange={handleInputChange}
             />
           </div>
         </div>
-{formData.transportChrFull || formData.transportChrPart  != "" ?
-  <div>
+        {formData.transportChrFull || formData.transportChrPart != "" ? (
+          <div>
+            <div className="display-inline">
+              <div className="form-group">
+                {/* <label htmlFor="from">Loading point floor:</label> */}
+                <select
+                  className="input margin"
+                  id="loadPointFloor"
+                  name="loadPointFloor"
+                  value={formData.loadPointFloor}
+                  onChange={handleInputChange}
+                >
+                  <option>Any</option>
+                  <option>Ground</option>
+                  <option>1st</option>
+                  <option>2nd</option>
+                  <option>3rd</option>
+                  <option>4th</option>
+                  <option>5th</option>
+                  <option>6th</option>
+                  <option>7th</option>
+                  <option>8th</option>
+                  <option>9th</option>
+                  <option>10th</option>
+                  <option>11th</option>
+                  <option>12th</option>
+                </select>
+              </div>
+              <div className="form-group">
+                {/* <label htmlFor="from">Unloading point floor:</label> */}
+                <select
+                  className="input"
+                  id="unloadPointFloor"
+                  name="unloadPointFloor"
+                  value={formData.unloadPointFloor}
+                  onChange={handleInputChange}
+                >
+                  <option>Any</option>
+                  <option>Ground</option>
+                  <option>1st</option>
+                  <option>2nd</option>
+                  <option>3rd</option>
+                  <option>4th</option>
+                  <option>5th</option>
+                  <option>6th</option>
+                  <option>7th</option>
+                  <option>8th</option>
+                  <option>9th</option>
+                  <option>10th</option>
+                  <option>11th</option>
+                  <option>12th</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="display-inline">
+              <div className="form-group">
+                {/* <label htmlFor="from">Loading point lift:</label> */}
+                <select
+                  className="input margin"
+                  id="loadPointLift"
+                  name="loadPointLift"
+                  value={formData.loadPointLift}
+                  onChange={handleInputChange}
+                >
+                  <option>Available</option>
+                  <option>Not Available</option>
+                </select>
+              </div>
+              <div className="form-group">
+                {/* <label htmlFor="from">Unloading point lift:</label> */}
+                <select
+                  className="input"
+                  id="unloadPointLift"
+                  name="unloadPointLift"
+                  value={formData.unloadPointLift}
+                  onChange={handleInputChange}
+                >
+                  <option>Available</option>
+                  <option>Not Available</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="display-inline">
           <div className="form-group">
-            <label htmlFor="from">Loading point floor:</label>
-            <select
+            {/* <label htmlFor="from">CAR/BIKE Part Load:</label> */}
+            <input
+              type="text"
               className="input margin"
-              id="loadPointFloor"
-              name="loadPointFloor"
-              value={formData.loadPointFloor}
+              placeholder="CAR/BIKE Part Load"
+              id="carChrPart"
+              name="carChrPart"
+              value={formData.carChrPart}
               onChange={handleInputChange}
-            >
-              <option>Any</option>
-              <option>Ground</option>
-              <option>1st</option>
-              <option>2nd</option>
-              <option>3rd</option>
-              <option>4th</option>
-              <option>5th</option>
-              <option>6th</option>
-              <option>7th</option>
-              <option>8th</option>
-              <option>9th</option>
-              <option>10th</option>
-              <option>11th</option>
-              <option>12th</option>
-            </select>
+            />
+          </div>
+
+          <div className="form-group">
+            {/* <label htmlFor="from">CAR/BIKE Full Load:</label> */}
+            <input
+              type="text"
+              id="carChrFull"
+              name="carChrFull"
+              placeholder="CAR/BIKE Full Load"
+              value={formData.carChrFull}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+
+        <div className="display-inline">
+          <div className="form-group">
+            {/* <label htmlFor="from">Storage Charges :</label> */}
+            <input
+              type="text"
+              className="input margin"
+              id="storageCharges"
+              placeholder="Storage Charges"
+              name="storageCharges"
+              value={formData.storageCharges}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="form-group">
+            {/* <label htmlFor="from">Storage Days :</label> */}
+            <input
+              type="text"
+              id="storageDays"
+              name="storageDays"
+              placeholder="Storage Days"
+              value={formData.storageDays}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+
+        <div className="display-inline">
+          <div className="form-group">
+            {/* <label htmlFor="from">GST :</label> */}
+            <input
+              type="text"
+              className="input margin"
+              id="gst"
+              name="gst"
+              placeholder="GST"
+              value={formData.gst}
+              onChange={handleInputChange}
+            />
           </div>
           <div className="form-group">
-            <label htmlFor="from">Unloading point floor:</label>
-            <select
-              className="input"
-              id="unloadPointFloor"
-              name="unloadPointFloor"
-              value={formData.unloadPointFloor}
+            {/* <label htmlFor="from">Advance Amount :</label> */}
+            <input
+              type="text"
+              id="advanceAmount"
+              name="advanceAmount"
+              placeholder="Advance Amount"
+              value={formData.advanceAmount}
               onChange={handleInputChange}
-            >
-              <option>Any</option>
-              <option>Ground</option>
-              <option>1st</option>
-              <option>2nd</option>
-              <option>3rd</option>
-              <option>4th</option>
-              <option>5th</option>
-              <option>6th</option>
-              <option>7th</option>
-              <option>8th</option>
-              <option>9th</option>
-              <option>10th</option>
-              <option>11th</option>
-              <option>12th</option>
-            </select>
+            />
           </div>
-        </div>
-
-        <div className="display-inline">
-        <div className="form-group">
-            <label htmlFor="from">Loading point lift:</label>
-            <select
-              className="input margin"
-              id="loadPointLift"
-              name="loadPointLift"
-              value={formData.loadPointLift}
-              onChange={handleInputChange}
-            >
-              <option>Available</option>
-              <option>Not Available</option>
-            
-            </select>
-          </div>
-        <div className="form-group">
-            <label htmlFor="from">Unloading point lift:</label>
-            <select
-              className="input"
-              id="unloadPointLift"
-              name="unloadPointLift"
-              value={formData.unloadPointLift}
-              onChange={handleInputChange}
-            >
-              <option>Available</option>
-              <option>Not Available</option>
-            
-            </select>
-          </div>
-        
-        </div>
-        </div>
-: ""
-        }
-        <div className="display-inline">
-
-        <div className="form-group">
-          <label htmlFor="from">CAR/BIKE Part Load:</label>
-          <input
-          
-            type="text"
-            className="input margin"
-            id="carChrPart"
-            name="carChrPart"
-            value={formData.carChrPart}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="from">CAR/BIKE Full Load:</label>
-          <input
-            type="text"
-            id="carChrFull"
-            name="carChrFull"
-            value={formData.carChrFull}
-            onChange={handleInputChange}
-          />
-        </div>
-        </div>
-
-        <div className="display-inline">
-
-        <div className="form-group">
-          <label htmlFor="from">Storage Charges :</label>
-          <input
-            type="text"
-            className="input margin"
-            id="storageCharges"
-            name="storageCharges"
-            value={formData.storageCharges}
-            onChange={handleInputChange}
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="from">Storage Days :</label>
-          <input
-            type="text"
-            id="storageDays"
-            name="storageDays"
-            value={formData.storageDays}
-            onChange={handleInputChange}
-          />
-        </div>
-        </div>
-
-        <div className="display-inline">
-
-        <div className="form-group">
-          <label htmlFor="from">GST :</label>
-          <input
-            type="text"
-            className="input margin"
-            id="gst"
-            name="gst"
-            value={formData.gst}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="from">Advance Amount :</label>
-          <input
-            type="text"
-            id="advanceAmount"
-            name="advanceAmount"
-            value={formData.advanceAmount}
-            onChange={handleInputChange}
-          />
-        </div>
         </div>
 
         <button type="submit" className="submit-button margin">
           Download
         </button>
         <button className="submit-button" onClick={handleClear}>
-         Clear
+          Clear
         </button>
       </form>
     </div>
   );
 };
 
-export default Form;
+export default BocInvoice;
