@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Form.css";
 import jsPDF from "jspdf";
 
-import Logo from "./logo.png"; // Import your logo image
+import Logo from "./Images/HtmLogo.png"; // Import your logo image
 import SupportLogo from "./support-logo.png";
 
 import resix from "./Images/resix.png";
@@ -84,15 +84,14 @@ const BocInvoice = () => {
     pdf.text(
       12,
       34,
-      "E-Mail :bangaloreonecargo@gmail.com             Web : www.bangaloreonecargo.com"
+      "E-Mail :htmpackersandmovers@gmail.com             Web : www.htmmovers.in"
     );
     pdf.setFontSize(10);
     pdf.setFont(undefined, "bold");
 
-    pdf.text(130, 14, "GST : 29APVPT9158A1Z3");
     pdf.text(130, 18, "FRIGHT BILL");
 
-    pdf.setFillColor(255, 0, 0); // Red color
+    pdf.setFillColor(0,63,171);
 
     // Add a filled rectangular box to the PDF
     pdf.rect(130, 22, 26, 10, "F"); // 'F' stands for 'Fill'
@@ -105,7 +104,7 @@ const BocInvoice = () => {
     pdf.setTextColor(0, 0, 0);
     pdf.setFontSize(10);
     pdf.setFont(undefined, "none");
-    pdf.text(156, 26, " 99644 76742");
+    pdf.text(156, 26, " 72042 08209");
     pdf.text(156, 30, " 97412 42669");
     pdf.addImage(SupportLogo, "PNG", 176, 21, 15, 10);
 
@@ -132,7 +131,7 @@ const BocInvoice = () => {
     //end of first layer
 
     pdf.setFontSize(16);
-    pdf.setFillColor(255, 0, 0);
+    pdf.setFillColor(0,63,171);
     pdf.rect(12, 82, 180, 10, "F");
 
     pdf.setDrawColor(0, 0, 0);
@@ -246,9 +245,9 @@ const BocInvoice = () => {
     pdf.text(`${formData.description}`, 13, 222);
 
     pdf.setFontSize(16);
-    pdf.setTextColor(255, 0, 0);
+    pdf.setTextColor(0,63,171);
 
-    pdf.text(`For BANGALORE ONE CARGO`, 110, 250);
+    pdf.text(`For HTM PACKERS AND MOVERS`, 106, 250);
 
     pdf.setFontSize(14);
     pdf.setTextColor(0, 0, 0);
@@ -262,7 +261,7 @@ const BocInvoice = () => {
     const sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
     const sanitizedMobile = formData.mobile.replace(/[^0-9]/g, "");
 
-    const pdfName = `Boc_Invoice_${sanitizedName}.pdf`;
+    const pdfName = `Htm_Invoice_${sanitizedName}.pdf`;
 
     pdf.save(pdfName);
   };
@@ -270,7 +269,7 @@ const BocInvoice = () => {
   return (
     <div className="form-container">
       {/* <h4><Link to="/">Go to Home</Link></h4> */}
-      <h4>Bangalore One Cargo Invoice</h4>
+      <h4>HTM Invoice</h4>
 
       <form onSubmit={handleSubmit}>
         <div className="display-inline">

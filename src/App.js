@@ -5,6 +5,7 @@ import Form from './Pages/Form';
 import './App.css';
 import HtmQuotation from './Pages/HtmQuotation';
 import BocInvoice from './Pages/BocInvoice';
+import HtmInvoice from './Pages/HtmInvoice';
 
 class App extends Component {
   render() {
@@ -13,33 +14,40 @@ class App extends Component {
         <Router>
           <div >
             <div>
-              <NavLink
+              {/* <NavLink
                 to="/"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
                 Home
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 to="/Form"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                BOC
+                BOC Quotation
               </NavLink>
               <NavLink
                 to="/HtmQoutation"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                HTM
+                HTM Quotation
               </NavLink>
               <NavLink
                 to="/BocInvoice"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                Invoice
+                BOC Invoice
+              </NavLink>
+              <NavLink
+                to="/HtmInvoice"
+                className="nav-button"
+                activeClassName="active" // Add this class when the link is active
+              >
+                HTM Invoice
               </NavLink>
             </div>
 
@@ -48,6 +56,7 @@ class App extends Component {
               <Route exact path="/Form" element={<Form />} />
               <Route exact path="/HtmQoutation" element={<HtmQuotation />} />
               <Route exact path="/BocInvoice" element={<BocInvoice />} />
+              <Route exact path="/HtmInvoice" element={<HtmInvoice />} />
             </Routes>
           </div>
         </Router>
