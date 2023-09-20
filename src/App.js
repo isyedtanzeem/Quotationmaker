@@ -26,28 +26,28 @@ class App extends Component {
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                BOC Quotation
+                BOC Quote
               </NavLink>
               <NavLink
                 to="/HtmQoutation"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                HTM Quotation
+                HTM Quote
               </NavLink>
               <NavLink
                 to="/BocInvoice"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                BOC Invoice
+                BOC Bill
               </NavLink>
               <NavLink
                 to="/HtmInvoice"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                HTM Invoice
+                HTM Bill
               </NavLink>
             </div>
 
