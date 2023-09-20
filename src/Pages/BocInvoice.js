@@ -198,24 +198,26 @@ let count = day + 166;
     pdf.text(`${subTotal}`, 154, 177);
     
     pdf.text(`GST ${formData.gst}%`, 112, 187);
-    let gstAmount = 500
 
-    pdf.text(`${gstAmount}`, 154, 187);
 
-    if (isNaN(gstAmount)) {
-      gstAmount = "";
+    let gstTotal = parseInt(subTotal) * formData.gst;
+    let gstAmountTotal = gstTotal / 100;
+
+    if (isNaN(gstAmountTotal)) {
+      gstAmountTotal = "";
     }
+    pdf.text(`${gstAmountTotal}`, 154, 187);
 
-    let gstTotal = parseInt(formData.transportCharges) * formData.gst;
-    let gstAmountPart = gstTotal / 100;
 
-    console.log(gstAmountPart)
+   
+
+    console.log(gstAmountTotal)
 
     pdf.setFontSize(16);
     pdf.setFont(undefined, "bold");
 
     pdf.text(` Total`, 112, 197);
-    const grandTotal = (gstAmountPart || 0 )+ subTotal;
+    const grandTotal = (gstAmountTotal || 0 )+ subTotal;
     pdf.text(`${grandTotal}`, 154, 197);
 
     pdf.setFont(undefined, "none");
