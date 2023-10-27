@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink , Link} from 'react-router-dom';
 import Home from './Pages/Home';
+import Menu from './Pages/Menu';
 import Form from './Pages/Form';
 import './App.css';
 import HtmQuotation from './Pages/HtmQuotation';
@@ -14,27 +15,21 @@ class App extends Component {
         <Router>
           <div >
             <div>
-              {/* <NavLink
-                to="/"
-                className="nav-button"
-                activeClassName="active" // Add this class when the link is active
-              >
-                Home
-              </NavLink> */}
+            {/* <Routes path="/Home" component={Home}></Routes>
               <NavLink
-                to="/Form"
+                to="/Home"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
-                BOC Quote
+                Home 
               </NavLink>
-              <NavLink
+              <Link
                 to="/HtmQoutation"
                 className="nav-button"
                 activeClassName="active" // Add this class when the link is active
               >
                 HTM Quote
-              </NavLink>
+              </Link>
               <NavLink
                 to="/BocInvoice"
                 className="nav-button"
@@ -48,11 +43,12 @@ class App extends Component {
                 activeClassName="active" // Add this class when the link is active
               >
                 HTM Bill
-              </NavLink>
+              </NavLink> */}
             </div>
 
             <Routes>
-              <Route exact path="/" element={<Home />} />
+              <Route exact path="/Home" element={<Home />} />
+              <Route exact path="/Menu" element={<Menu />} />
               <Route exact path="/Form" element={<Form />} />
               <Route exact path="/HtmQoutation" element={<HtmQuotation />} />
               <Route exact path="/BocInvoice" element={<BocInvoice />} />

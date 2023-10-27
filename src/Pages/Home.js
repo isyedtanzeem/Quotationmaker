@@ -5,11 +5,16 @@ import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 
 function Home (){
     return
-     	<div className="App">
-    <div>	<button><Link to="/">Home</Link></button>
-    <button><Link to="/Form">BOC</Link></button>
+     	<div >
+    <h1>Hello</h1>
+    <h1>Hello</h1>
+    <h1>Hello</h1>
+    <h1>Hello</h1>
+    <h1>Hello</h1>
+    <h1>Hello</h1>
+    <Link to="/Form" >Back to Home Page</Link>
         </div>
-        </div>
+
 }
   
 export default Home;
