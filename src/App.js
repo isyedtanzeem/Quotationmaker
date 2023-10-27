@@ -47,7 +47,7 @@ class App extends Component {
             </div>
 
             <Routes>
-              <Route exact path="/Home" element={<Home />} />
+            
               <Route exact path="/" element={<Menu />} />
               <Route exact path="/Form" element={<Form />} />
               <Route exact path="/HtmQoutation" element={<HtmQuotation />} />
