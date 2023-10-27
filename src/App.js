@@ -48,7 +48,7 @@ class App extends Component {
 
             <Routes>
               <Route exact path="/Home" element={<Home />} />
-              <Route exact path="/Menu" element={<Menu />} />
+              <Route exact path="/" element={<Menu />} />
               <Route exact path="/Form" element={<Form />} />
               <Route exact path="/HtmQoutation" element={<HtmQuotation />} />
               <Route exact path="/BocInvoice" element={<BocInvoice />} />
