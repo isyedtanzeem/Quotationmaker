@@ -43,7 +43,7 @@ const HtmQuotation = () => {
     }));
   };
 
-let dateForCount = new Date()
+let dateForCount = new Date();
 
 const handleClear = () => {
   setFormData({  transportChrFull: "",

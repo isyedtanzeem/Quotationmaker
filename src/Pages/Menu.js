@@ -31,7 +31,7 @@ const Menu = () => {
       <div className="button-container">  
        
       <Link to='/Form' className="boc-button ">Boc LR</Link>
-   <Link to='/HtmQoutation' className="htm-button">Htm LR</Link>
+   <Link to='/HtmLr' className="htm-button">Htm LR</Link>
        </div>
        
       
