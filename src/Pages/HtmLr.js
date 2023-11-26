@@ -228,7 +228,7 @@ pdf.text(118, 198,`order, endorsed on the Consignee copy on  a seprate  letter  
 pdf.rect(12, 157, 100, 50)
 
     // Remove spaces and special characters from name and mobile
-    const sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
+    const sanitizedName = formData.consignorName.replace(/[^a-zA-Z0-9]/g, "");
     const sanitizedMobile = formData.mobile.replace(/[^0-9]/g, "");
 
     const pdfName = `Htm_LR_${sanitizedName}.pdf`;
