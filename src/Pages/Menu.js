@@ -32,10 +32,14 @@ const Menu = () => {
        
       <Link to='/Form' className="boc-button ">Boc LR</Link>
    <Link to='/HtmLr' className="htm-button">Htm LR</Link>
+
+   
        </div>
        
+       <div className="button-container"> 
+   <Link to='/BcsQuotation' className="bcsbutton">Bangalore Crane Service Quotation</Link>
       
-      
+    </div>
     </div>
   );
 };

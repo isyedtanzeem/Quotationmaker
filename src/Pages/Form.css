@@ -40,7 +40,22 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.bcsbutton{
+  width: 240px;
+  background-color: #3e0090;
+  color: white;
+  height: 50px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  text-decoration: none;
+padding-bottom: 10px;
+  font-size: 20px;
 
+
+}
 .display-inline{
   display: flex;
 }
@@ -65,11 +80,16 @@ input {
   text-align: center;
 margin-bottom: 20px;
 margin-right: 20px;
+text-decoration: none;
+justify-content: center;
+padding-top: 12px;
+font-size: 20px;
+
 
 }
 .htm-button {
   width: 140px;
-  background-color: #084d00;
+  background-color: #003c2c;
   color: white;
   height: 50px;
   border: none;
@@ -78,6 +98,10 @@ margin-right: 20px;
   text-align: center;
 margin-bottom: 20px;
 margin-right: 20px;
+text-decoration: none;
+justify-content: center;
+padding-top: 12px;
+font-size: 20px;
 }
 
 .form-group select {
