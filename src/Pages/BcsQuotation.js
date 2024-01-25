@@ -634,7 +634,11 @@ const BcsQuotation = () => {
     pdf.rect(12, 223, 185, 50);
     pdf.setFontSize(18);
     pdf.setFont(undefined, "bold");
-    pdf.text(`Total`, 135, 220);
+    
+    pdf.text(`Advance Amount:`, 15, 220);
+   
+    pdf.text(`${formData.advanceAmount}`, 65, 220);
+
     let totalAmount =
       amount1 +
       amount2 +
@@ -732,12 +736,23 @@ const BcsQuotation = () => {
         <div className="display-inline">
           <div className="form-group">
             <input
-              className="inputAddress "
+              className="input margin "
               type="text"
               id="address"
               placeholder="Address"
               name="address"
               value={formData.address}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              className="input margin "
+              type="text"
+              id="advanceAmount"
+              placeholder="Advance"
+              name="advanceAmount"
+              value={formData.advanceAmount}
               onChange={handleInputChange}
             />
           </div>
