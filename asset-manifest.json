@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/Quotationmaker/static/css/main.ea3ce71e.css",
-    "main.js": "/Quotationmaker/static/js/main.a3de2bac.js",
+    "main.js": "/Quotationmaker/static/js/main.1bc5db16.js",
     "static/js/498.36aff388.chunk.js": "/Quotationmaker/static/js/498.36aff388.chunk.js",
     "static/js/703.9e5da203.chunk.js": "/Quotationmaker/static/js/703.9e5da203.chunk.js",
     "static/js/258.9bff8e70.chunk.js": "/Quotationmaker/static/js/258.9bff8e70.chunk.js",
     "static/js/787.b9266859.chunk.js": "/Quotationmaker/static/js/787.b9266859.chunk.js",
-    "static/media/Foot.png": "/Quotationmaker/static/media/Foot.86e3fd9652b0925a3821.png",
-    "static/media/Head.png": "/Quotationmaker/static/media/Head.bcf5acc8493ee581dec9.png",
     "static/media/resix.png": "/Quotationmaker/static/media/resix.dc29e2b746309d6678a7.png",
     "static/media/htmResix.png": "/Quotationmaker/static/media/htmResix.49f3b3e98fd4c7b07c4a.png",
     "static/media/HtmLogo.png": "/Quotationmaker/static/media/HtmLogo.c83a4adc018330dfa254.png",
+    "static/media/Foot.png": "/Quotationmaker/static/media/Foot.51a3f2710089ae849c8e.png",
+    "static/media/Head.png": "/Quotationmaker/static/media/Head.bca2eb402e3d71c7f6bb.png",
     "static/media/Bcswatermark.png": "/Quotationmaker/static/media/Bcswatermark.dc63676ddf4b8739f0df.png",
     "static/media/logo.png": "/Quotationmaker/static/media/logo.050bb93225ea789e72a2.png",
     "static/media/signature.png": "/Quotationmaker/static/media/signature.537176f52697a84bc96e.png",
     "static/media/callicon.png": "/Quotationmaker/static/media/callicon.2fa539562c029c1d51b6.png",
     "index.html": "/Quotationmaker/index.html",
     "main.ea3ce71e.css.map": "/Quotationmaker/static/css/main.ea3ce71e.css.map",
-    "main.a3de2bac.js.map": "/Quotationmaker/static/js/main.a3de2bac.js.map",
+    "main.1bc5db16.js.map": "/Quotationmaker/static/js/main.1bc5db16.js.map",
     "498.36aff388.chunk.js.map": "/Quotationmaker/static/js/498.36aff388.chunk.js.map",
     "703.9e5da203.chunk.js.map": "/Quotationmaker/static/js/703.9e5da203.chunk.js.map",
     "258.9bff8e70.chunk.js.map": "/Quotationmaker/static/js/258.9bff8e70.chunk.js.map",
@@ -25,6 +25,6 @@
   },
   "entrypoints": [
     "static/css/main.ea3ce71e.css",
-    "static/js/main.a3de2bac.js"
+    "static/js/main.1bc5db16.js"
   ]
 }
