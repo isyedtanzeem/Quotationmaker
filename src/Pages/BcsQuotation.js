@@ -80,6 +80,8 @@ const BcsQuotation = () => {
     name: "",
     mobile: "",
     address: "",
+    gst: "",
+    advanceAmount:""
   });
 
   const handleInputChange = (event) => {
@@ -159,6 +161,8 @@ const BcsQuotation = () => {
       name: "",
       mobile: "",
       address: "",
+      gst: "",
+    advanceAmount:""
     });
   };
 
@@ -536,110 +540,36 @@ const BcsQuotation = () => {
       amount15 = "";
     }
     pdf.text(`${amount15}`, 178, 176,'right');
-    //16
+    
     pdf.rect(12, 164, 14, 7);
     pdf.rect(26, 164, 82, 7);
     pdf.rect(108, 164, 26, 7);
     pdf.rect(134, 164, 20, 7);
     pdf.rect(154, 164, 43, 7);
-    pdf.text(`16`, 17, 183);
-    pdf.text(`${formData.no16Item}`, 30, 183);
-    pdf.text(`${formData.no16Rate}`, 123, 183,'right');
-    pdf.text(`${formData.qty16}`, 146, 183,'right');
 
-    let amount16 = formData.no16Rate * formData.qty16;
-    if (isNaN(amount16) || amount16 === 0) {
-      amount16 = "";
-    }
-    pdf.text(`${amount16}`, 178, 183,'right');
-    //17
     pdf.rect(12, 171, 14, 7);
     pdf.rect(26, 171, 82, 7);
     pdf.rect(108, 171, 26, 7);
     pdf.rect(134, 171, 20, 7);
     pdf.rect(154, 171, 43, 7);
-    pdf.text(`17`, 17, 190);
-    pdf.text(`${formData.no17Item}`, 30, 190);
-    pdf.text(`${formData.no17Rate}`, 123, 190,'right');
-    pdf.text(`${formData.qty17}`, 146, 190,'right');
+   
 
-    let amount17 = formData.no17Rate * formData.qty17;
-    if (isNaN(amount17) || amount17 === 0) {
-      amount17 = "";
-    }
-    pdf.text(`${amount17}`, 178, 190,'right');
-    //18
-    pdf.rect(12, 178, 14, 7);
-    pdf.rect(26, 178, 82, 7);
-    pdf.rect(108, 178, 26, 7);
-    pdf.rect(134, 178, 20, 7);
-    pdf.rect(154, 178, 43, 7);
-    pdf.text(`18`, 17, 197);
-    pdf.text(`${formData.no18Item}`, 30, 197);
-    pdf.text(`${formData.no18Rate}`, 123, 197,'right');
-    pdf.text(`${formData.qty18}`, 146, 197,'right');
-
-    let amount18 = formData.no18Rate * formData.qty18;
-    if (isNaN(amount18) || amount18 === 0) {
-      amount18 = "";
-    }
-    pdf.text(`${amount18}`, 178, 197,'right');
-    //19
-    pdf.rect(12, 185, 14, 7);
-    pdf.rect(26, 185, 82, 7);
-    pdf.rect(108, 185, 26, 7);
-    pdf.rect(134, 185, 20, 7);
-    pdf.rect(154, 185, 43, 7);
-    pdf.text(`19`, 17, 204);
-    pdf.text(`${formData.no19Item}`, 30, 204);
-    pdf.text(`${formData.no19Rate}`, 123, 204,'right');
-    pdf.text(`${formData.qty19}`, 146, 204,'right');
-
-    let amount19 = formData.no19Rate * formData.qty19;
-    if (isNaN(amount19) || amount19 === 0) {
-      amount19 = "";
-    }
-    pdf.text(`${amount19}`, 178, 204,'right');
-    //20
-    pdf.rect(12, 192, 14, 7);
-    pdf.rect(26, 192, 82, 7);
-    pdf.rect(108, 192, 26, 7);
-    pdf.rect(134, 192, 20, 7);
-    pdf.rect(154, 192, 43, 7);
-    pdf.text(`20`, 17, 211);
-    pdf.text(`${formData.no20Item}`, 30, 211);
-    pdf.text(`${formData.no20Rate}`, 123, 211,'right');
-    pdf.text(`${formData.qty20}`, 146, 211,'right');
-
-    let amount20 = formData.no20Rate * formData.qty20;
-    if (isNaN(amount20) || amount20 === 0) {
-      amount20 = "";
-    }
-    pdf.text(`${amount20}`, 178, 211,'right');
-
-    pdf.rect(12, 199, 14, 7);
-    pdf.rect(26, 199, 82, 7);
-    pdf.rect(108, 199, 26, 7);
-    pdf.rect(134, 199, 20, 7);
-    pdf.rect(154, 199, 43, 7);
-
-    pdf.rect(12, 206, 14, 7);
-    pdf.rect(26, 206, 82, 7);
-    pdf.rect(108, 206, 26, 7);
-    pdf.rect(134, 206, 20, 7);
-    pdf.rect(154, 206, 43, 7);
-
-    pdf.rect(154, 213, 43, 10);
-    pdf.rect(12, 213, 142, 10);
-    pdf.rect(12, 223, 185, 50);
-    pdf.setFontSize(18);
+    // pdf.rect(154, 178, 43, 10);
+    // pdf.rect(12, 178, 142, 10);
+    // pdf.rect(12, 223, 185, 50);
+    pdf.setFontSize(16);
     pdf.setFont(undefined, "bold");
+
+   
     
     pdf.text(`Advance Amount:`, 15, 220);
-   
+    pdf.text(`Gst ${formData.gst}%`, 126, 195);
     pdf.text(`${formData.advanceAmount}`, 65, 220);
+    if (isNaN(formData.advanceAmount) || formData.advanceAmount === 0) {
+      formData.advanceAmount = "";
+    }
 
-    let totalAmount =
+    let subTotal =
       amount1 +
       amount2 +
       amount3 +
@@ -654,20 +584,33 @@ const BcsQuotation = () => {
       amount12 +
       amount13 +
       amount14 +
-      amount15 +
-      amount16 +
-      amount17 +
-      amount18 +
-      amount19 +
-      amount20;
-    pdf.text(`${totalAmount}`, 182, 220,"right");
+      amount15 ;
 
+      pdf.text(`Sub Total`, 125, 185);
+    pdf.text(`${subTotal}`, 185, 185,"right");
+
+    let gstTotal = parseInt(subTotal) * formData.gst;
+    let gstAmountTotal = gstTotal / 100;
+
+    if (isNaN(gstAmountTotal) || gstAmountTotal === 0 ) {
+      gstAmountTotal = "";
+    }
+    pdf.text(`${gstAmountTotal}`, 185, 195,'right');
+  
+    pdf.text(` Grand Total`, 115, 205);
+    const grandTotal = (parseFloat(gstAmountTotal) || 0) + parseFloat(subTotal);
+
+
+    if (isNaN(grandTotal) || grandTotal === 0) {
+      grandTotal = "";
+    }
+    pdf.text(`${grandTotal}`, 185, 205,'right');
     pdf.setFontSize(12);
 
     pdf.setFont(undefined, "none");
 
     const toWords = new ToWords();
-    let inWords = toWords.convert(totalAmount, { currency: true });
+    let inWords = toWords.convert(grandTotal, { currency: true });
     pdf.setFont(undefined, "bold");
     pdf.text(`IN WORDS:`, 14, 230);
     pdf.setFont(undefined, "none");
@@ -736,7 +679,7 @@ const BcsQuotation = () => {
         <div className="display-inline">
           <div className="form-group">
             <input
-              className="input margin "
+              className="inputaddress "
               type="text"
               id="address"
               placeholder="Address"
@@ -745,7 +688,10 @@ const BcsQuotation = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
+         
+        </div>
+        <div className="display-inline">
+        <div className="form-group">
             <input
               className="input margin "
               type="text"
@@ -753,6 +699,18 @@ const BcsQuotation = () => {
               placeholder="Advance"
               name="advanceAmount"
               value={formData.advanceAmount}
+              onChange={handleInputChange}
+            />
+          </div>
+       
+          <div className="form-group">
+            <input
+              type="text"
+              className="input margin"
+              placeholder="Gst"
+              id="gst"
+              name="gst"
+              value={formData.gst}
               onChange={handleInputChange}
             />
           </div>
@@ -1319,192 +1277,7 @@ const BcsQuotation = () => {
         ) : (
           ""
         )}
-        {formData.no15Rate != "" ? (
-          <div>
-            {/* 16 */}
-            <div className="display-inline ">
-              <div className="form-group">
-                <input
-                  className="inputItem margin"
-                  type="text"
-                  id="no16Item"
-                  placeholder="Item 16"
-                  name="no16Item"
-                  value={formData.no16Item}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputQty"
-                  type="text"
-                  id="qty16"
-                  name="qty16"
-                  placeholder="Qty 16"
-                  value={formData.qty16}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputRate"
-                  type="text"
-                  placeholder="Rate 16"
-                  id="no16Rate"
-                  name="no16Rate"
-                  value={formData.no16Rate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            {/* 17 */}
-            <div className="display-inline ">
-              <div className="form-group">
-                <input
-                  className="inputItem margin"
-                  type="text"
-                  id="no17Item"
-                  placeholder="Item 17"
-                  name="no17Item"
-                  value={formData.no17Item}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputQty"
-                  type="text"
-                  id="qty17"
-                  name="qty17"
-                  placeholder="Qty 17"
-                  value={formData.qty17}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputRate"
-                  type="text"
-                  id="no17Rate"
-                  placeholder="Rate 17"
-                  name="no17Rate"
-                  value={formData.no17Rate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            {/* 18 */}
-            <div className="display-inline ">
-              <div className="form-group">
-                <input
-                  className="inputItem margin"
-                  type="text"
-                  id="no18Item"
-                  placeholder="Item 18"
-                  name="no18Item"
-                  value={formData.no18Item}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputQty"
-                  type="text"
-                  id="qty18"
-                  placeholder="Qty 18"
-                  name="qty18"
-                  value={formData.qty18}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputRate"
-                  type="text"
-                  id="no18Rate"
-                  name="no18Rate"
-                  placeholder="Rate 18"
-                  value={formData.no18Rate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            {/* 19 */}
-            <div className="display-inline ">
-              <div className="form-group">
-                <input
-                  className="inputItem margin"
-                  type="text"
-                  id="no19Item"
-                  placeholder="Item 19"
-                  name="no19Item"
-                  value={formData.no19Item}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputQty"
-                  type="text"
-                  id="qty19"
-                  placeholder="Qty 19"
-                  name="qty19"
-                  value={formData.qty19}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputRate"
-                  type="text"
-                  id="no19Rate"
-                  placeholder="Rate 19"
-                  name="no19Rate"
-                  value={formData.no19Rate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            {/* 20 */}
-            <div className="display-inline ">
-              <div className="form-group">
-                <input
-                  className="inputItem margin"
-                  type="text"
-                  id="no20Item"
-                  placeholder="Item 20"
-                  name="no20Item"
-                  value={formData.no20Item}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputQty"
-                  type="text"
-                  id="qty20"
-                  name="qty20"
-                  placeholder="Qty 20"
-                  value={formData.qty20}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="inputRate"
-                  type="text"
-                  id="no20Rate"
-                  placeholder="Rate 20 "
-                  name="no20Rate"
-                  value={formData.no20Rate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
+        
 
         <button type="submit" className="submit-button margin">
           Download

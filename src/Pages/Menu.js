@@ -19,7 +19,7 @@ const Menu = () => {
   return (
     <div className="form-container">
 	{/* <h4><Link to="/">Go to Home</Link></h4> */}
-      <h2> -----Quotation,Invoice and LR-----</h2>
+      <h2 className="headStyle"> Quotation,Invoice and LR</h2>
       <div className="button-container">  
         <Link to='/Form' className="boc-button">Boc Quoation</Link>
         <Link to='/HtmQoutation' className="htm-button">Htm Quotation</Link>
