@@ -30,7 +30,7 @@ const Menu = () => {
        </div>
       <div className="button-container">  
        
-      <Link to='/Form' className="boc-button ">Boc LR</Link>
+      <Link to='/BocLr' className="boc-button ">Boc LR</Link>
    <Link to='/HtmLr' className="htm-button">Htm LR</Link>
 
    
