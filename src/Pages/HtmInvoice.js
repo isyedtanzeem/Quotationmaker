@@ -12,6 +12,10 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 const BocInvoice = () => {
   const [formData, setFormData] = useState({
     transportCharges: "",
+    packingCharges: "",
+    unpackingCharges: "",
+    loadingCharges: "",
+    unloadingCharges: "",
     from: "",
     toLocation: "",
     storageCharges: "",
@@ -40,6 +44,10 @@ const BocInvoice = () => {
   const handleClear = () => {
     setFormData({
       transportCharges: "",
+      packingCharges: "",
+      unpackingCharges: "",
+      loadingCharges: "",
+      unloadingCharges: "",
       from: "",
       toLocation: "",
       storageCharges: "",
@@ -149,21 +157,28 @@ const BocInvoice = () => {
     pdf.rect(12, 92, 125, 10);
     pdf.rect(137, 92, 55, 10);
     pdf.text(`Transportation Charges`, 42, 98);
-    pdf.text(`${formData.transportCharges}`, 154, 98);
+    pdf.text(`${formData.transportCharges}`, 170, 98,"right");
 
     pdf.text(`Packing Charges`, 42, 108);
+    pdf.text(`${formData.packingCharges}`, 170, 108,"right");
     pdf.text(`Unpacking Charges`, 42, 118);
+    pdf.text(`${formData.unpackingCharges}`, 170, 118,"right");
+
     pdf.text(`Loading Charges`, 42, 128);
+    pdf.text(`${formData.loadingCharges}`, 170, 128,"right");
+
     pdf.text(`Unloading Charges`, 42, 138);
+    pdf.text(`${formData.unloadingCharges}`, 170, 138,"right");
+
     pdf.text(`Storage Charges`, 42, 148);
 
     let strCharges = formData.storageCharges;
-    pdf.text(`${strCharges}`, 154, 148);
+    pdf.text(`${strCharges}`, 170, 148,"right");
     pdf.text(`Insurance `, 42, 158);
-    pdf.text(`${formData.insurance}`, 154, 158);
+    pdf.text(`${formData.insurance}`, 170, 158,"right");
     pdf.text(`Documentation Charges`, 42, 168);
     let docChr = formData.docCharges;
-    pdf.text(`${docChr}`, 154, 168);
+    pdf.text(`${docChr}`, 170, 168,"right");
     console.log(strCharges, "storage");
     console.log(docChr, "docorage");
 
@@ -176,6 +191,10 @@ const BocInvoice = () => {
 
     let subTotal =
       (parseInt(formData.transportCharges) || 0) +
+      (parseInt(formData.packingCharges) || 0) +
+      (parseInt(formData.unpackingCharges) || 0) +
+      (parseInt(formData.loadingCharges) || 0) +
+      (parseInt(formData.unloadingCharges) || 0) +
       (parseInt(strCharges) || 0) +
       (parseInt(formData.docCharges) || 0) +
       (parseInt(formData.insurance) || 0);
@@ -188,7 +207,7 @@ const BocInvoice = () => {
 
     pdf.text(`Sub Total`, 112, 177);
 
-    pdf.text(`${subTotal}`, 154, 177);
+    pdf.text(`${subTotal}`, 170, 177,"right");
 
     pdf.text(`GST ${formData.gst}%`, 112, 187);
 
@@ -198,7 +217,7 @@ const BocInvoice = () => {
     if (isNaN(gstAmountTotal) || gstAmountTotal === 0 ) {
       gstAmountTotal = "";
     }
-    pdf.text(`${gstAmountTotal}`, 154, 187);
+    pdf.text(`${gstAmountTotal}`, 170, 187,"right");
 
     console.log(gstAmountTotal);
 
@@ -211,7 +230,7 @@ const BocInvoice = () => {
     if (isNaN(grandTotal) || grandTotal === 0) {
       grandTotal = "";
     }
-    pdf.text(`${grandTotal}`, 154, 197);
+    pdf.text(`${grandTotal}`, 170, 197,"right");
 
     pdf.setFont(undefined, "none");
 
@@ -321,6 +340,57 @@ const BocInvoice = () => {
             />
           </div>
         </div>
+        <div className="display-inline">
+        
+        <div className="form-group">
+          <label htmlFor="from">Packing Charges</label>
+          <input
+            className="input margin"
+            type="text"
+            id="packingCharges"
+            name="packingCharges"
+            value={formData.packingCharges}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="from">Unpacking Charges</label>
+          <input
+            className="input margin"
+            type="text"
+            id="unpackingCharges"
+            name="unpackingCharges"
+            value={formData.unpackingCharges}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+      <div className="display-inline">
+      
+        <div className="form-group">
+          <label htmlFor="from">Loading Charges</label>
+          <input
+            className="input margin"
+            type="text"
+            id="loadingCharges"
+            name="loadingCharges"
+            value={formData.loadingCharges}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="from">Unloading Charges</label>
+          <input
+            className="input margin"
+            type="text"
+            id="unloadingCharges"
+            name="unloadingCharges"
+            value={formData.unloadingCharges}
+            onChange={handleInputChange}
+          />
+        </div>
+       
+      </div>
         <div className="display-inline">
           <div className="form-group">
             <label htmlFor="from">From Location:</label>
