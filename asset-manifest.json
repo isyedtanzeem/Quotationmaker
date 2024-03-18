@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Quotationmaker/static/css/main.24f4c872.css",
-    "main.js": "/Quotationmaker/static/js/main.28ada663.js",
+    "main.js": "/Quotationmaker/static/js/main.062386c8.js",
     "static/js/498.36aff388.chunk.js": "/Quotationmaker/static/js/498.36aff388.chunk.js",
     "static/js/703.9e5da203.chunk.js": "/Quotationmaker/static/js/703.9e5da203.chunk.js",
     "static/js/258.9bff8e70.chunk.js": "/Quotationmaker/static/js/258.9bff8e70.chunk.js",
@@ -17,7 +17,7 @@
     "static/media/callicon.png": "/Quotationmaker/static/media/callicon.2fa539562c029c1d51b6.png",
     "index.html": "/Quotationmaker/index.html",
     "main.24f4c872.css.map": "/Quotationmaker/static/css/main.24f4c872.css.map",
-    "main.28ada663.js.map": "/Quotationmaker/static/js/main.28ada663.js.map",
+    "main.062386c8.js.map": "/Quotationmaker/static/js/main.062386c8.js.map",
     "498.36aff388.chunk.js.map": "/Quotationmaker/static/js/498.36aff388.chunk.js.map",
     "703.9e5da203.chunk.js.map": "/Quotationmaker/static/js/703.9e5da203.chunk.js.map",
     "258.9bff8e70.chunk.js.map": "/Quotationmaker/static/js/258.9bff8e70.chunk.js.map",
@@ -25,6 +25,6 @@
   },
   "entrypoints": [
     "static/css/main.24f4c872.css",
-    "static/js/main.28ada663.js"
+    "static/js/main.062386c8.js"
   ]
 }
