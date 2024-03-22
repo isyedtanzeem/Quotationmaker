@@ -1,12 +1,13 @@
 {
   "files": {
     "main.css": "/Quotationmaker/static/css/main.24f4c872.css",
-    "main.js": "/Quotationmaker/static/js/main.062386c8.js",
+    "main.js": "/Quotationmaker/static/js/main.bfd9e3b3.js",
     "static/js/498.36aff388.chunk.js": "/Quotationmaker/static/js/498.36aff388.chunk.js",
     "static/js/703.9e5da203.chunk.js": "/Quotationmaker/static/js/703.9e5da203.chunk.js",
     "static/js/258.9bff8e70.chunk.js": "/Quotationmaker/static/js/258.9bff8e70.chunk.js",
     "static/js/787.b9266859.chunk.js": "/Quotationmaker/static/js/787.b9266859.chunk.js",
     "static/media/resix.png": "/Quotationmaker/static/media/resix.dc29e2b746309d6678a7.png",
+    "static/media/bcsInvoiceHead.png": "/Quotationmaker/static/media/bcsInvoiceHead.ed6edf15475c45aec30c.png",
     "static/media/htmResix.png": "/Quotationmaker/static/media/htmResix.49f3b3e98fd4c7b07c4a.png",
     "static/media/HtmLogo.png": "/Quotationmaker/static/media/HtmLogo.c83a4adc018330dfa254.png",
     "static/media/Foot.png": "/Quotationmaker/static/media/Foot.51a3f2710089ae849c8e.png",
@@ -17,7 +18,7 @@
     "static/media/callicon.png": "/Quotationmaker/static/media/callicon.2fa539562c029c1d51b6.png",
     "index.html": "/Quotationmaker/index.html",
     "main.24f4c872.css.map": "/Quotationmaker/static/css/main.24f4c872.css.map",
-    "main.062386c8.js.map": "/Quotationmaker/static/js/main.062386c8.js.map",
+    "main.bfd9e3b3.js.map": "/Quotationmaker/static/js/main.bfd9e3b3.js.map",
     "498.36aff388.chunk.js.map": "/Quotationmaker/static/js/498.36aff388.chunk.js.map",
     "703.9e5da203.chunk.js.map": "/Quotationmaker/static/js/703.9e5da203.chunk.js.map",
     "258.9bff8e70.chunk.js.map": "/Quotationmaker/static/js/258.9bff8e70.chunk.js.map",
@@ -25,6 +26,6 @@
   },
   "entrypoints": [
     "static/css/main.24f4c872.css",
-    "static/js/main.062386c8.js"
+    "static/js/main.bfd9e3b3.js"
   ]
 }
