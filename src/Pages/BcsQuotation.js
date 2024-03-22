@@ -456,6 +456,15 @@ let BcsQuotation = () => {
 console.log(subTotal); // Output the subTotal
 
 
+pdf.text(`Advance Amount:`, 15, 220);
+pdf.text(`Gst ${formData.gst}%`, 126, 195);
+pdf.text(`${formData.advanceAmount}`, 65, 220);
+if (isNaN(formData.advanceAmount) || formData.advanceAmount === 0) {
+  formData.advanceAmount = "";
+}
+
+
+
       pdf.text(`Sub Total`, 125, 185);
     pdf.text(`${subTotal}`, 182, 185,"right");
 
@@ -562,7 +571,17 @@ console.log(subTotal); // Output the subTotal
          
         </div>
         <div className="display-inline">
-       
+        <div className="form-group">
+        <input
+          className="input margin "
+          type="text"
+          id="advanceAmount"
+          placeholder="Advance"
+          name="advanceAmount"
+          value={formData.advanceAmount}
+          onChange={handleInputChange}
+        />
+      </div>
        
           <div className="form-group">
             <input
