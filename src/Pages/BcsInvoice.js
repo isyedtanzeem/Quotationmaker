@@ -3,7 +3,7 @@ import "./Common.css";
 import { ToWords } from 'to-words';
 import jsPDF from "jspdf";
 import BcsWaterMark from "./Images/Bcswatermark.png"; // Import your logo image
-import Head from "./Images/Head.png"; // Import your logo image
+import Head from "./Images/bcsInvoiceHead.png"; // Import your logo image
 import Footer from "./Images/Foot.png"; // Import your logo image
 // import waterMark from "./Images/hmswatermark.png"; // Import your logo image
 
@@ -11,7 +11,7 @@ import callIcon from "./Images/callicon.png"; // Import your logo image
 import Signature from "./Images/signature.png";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-let BcsQuotation = () => {
+let BcsInvoice = () => {
   let [formData, setFormData] = useState({
     no1Rate: "",
     no2Rate: "",
@@ -171,7 +171,7 @@ let BcsQuotation = () => {
     pdf.setFontSize(55);
 
     pdf.addImage(Head, "PNG", 12, 8,185,30);
-    pdf.addImage(Footer, "PNG", 12, 240,185,30);
+    // pdf.addImage(Footer, "PNG", 12, 240,185,30);
    
 
     pdf.addImage(BcsWaterMark, "PNG", 30, 90, 160, 70);
@@ -193,7 +193,7 @@ let BcsQuotation = () => {
     // pdf.setFontSize(15);
     // pdf.setFont(undefined, "bold");
 
-    // pdf.text(160, 18, "Quotation");
+    // pdf.text(160, 18, "Invoice");
 
 
 
@@ -228,7 +228,7 @@ let BcsQuotation = () => {
     console.log(randomnum);
     pdf.rect(107, 41, 90, 7);
     pdf.text(`DATE: ${currentDate}`, 108, 45.4);
-    pdf.text(`Quotation No: BCS${randomnum}`, 108, 52.5, { align: "left" });
+    pdf.text(`Invoice No: BCS${randomnum}`, 108, 52.5, { align: "left" });
 
     pdf.rect(107, 48, 90, 7);
 
@@ -508,7 +508,7 @@ console.log(subTotal); // Output the subTotal
     let sanitizedName = formData.name.replace(/[^a-zA-Z0-9]/g, "");
     
 
-    let pdfName = `Crane_Quotation${sanitizedName}.pdf`;
+    let pdfName = `Crane_Invoice${sanitizedName}.pdf`;
     console.log(sanitizedName)
 
     pdf.save(pdfName);
@@ -517,7 +517,7 @@ console.log(subTotal); // Output the subTotal
   return (
     <div className="form-container">
       {/* <h4><Link to="/">Go to Home</Link></h4> */}
-      <h4>Bangalore Crane Service Quotation</h4>
+      <h4>Bangalore Crane Service Invoice</h4>
 
       <form onSubmit={handleSubmit}>
         <div className="display-inline">
@@ -998,4 +998,4 @@ console.log(subTotal); // Output the subTotal
   );
 };
 
-export default BcsQuotation;
+export default BcsInvoice;

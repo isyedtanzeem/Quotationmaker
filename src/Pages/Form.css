@@ -8,7 +8,7 @@
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-.headStyle{
+.headStyle {
   text-align: center;
   border: 3px inset #000000;
   border-radius: 13px;
@@ -22,13 +22,11 @@ label {
   margin-bottom: 5px;
 }
 
-
-.input{
+.input {
   width: 160px;
-  
 }
 
-.margin{
+.margin {
   margin-right: 20px;
 }
 
@@ -44,23 +42,23 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.bcsbutton{
-  width: 240px;
-  background-color: #3e0090;
+.bcsbutton {
+  width: 140px;
+  background-color: #250335;
   color: white;
   height: 50px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
-  justify-content: center;
+  margin-bottom: 20px;
+  margin-right: 20px;
   text-decoration: none;
-padding-bottom: 10px;
+  justify-content: center;
+  padding-top: 12px;
   font-size: 20px;
-
-
 }
-.display-inline{
+.display-inline {
   display: flex;
 }
 
@@ -82,14 +80,12 @@ padding-bottom: 10px;
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
-margin-bottom: 20px;
-margin-right: 20px;
-text-decoration: none;
-justify-content: center;
-padding-top: 12px;
-font-size: 20px;
-
-
+  margin-bottom: 20px;
+  margin-right: 20px;
+  text-decoration: none;
+  justify-content: center;
+  padding-top: 12px;
+  font-size: 20px;
 }
 .htm-button {
   width: 140px;
@@ -100,12 +96,12 @@ font-size: 20px;
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
-margin-bottom: 20px;
-margin-right: 20px;
-text-decoration: none;
-justify-content: center;
-padding-top: 12px;
-font-size: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  text-decoration: none;
+  justify-content: center;
+  padding-top: 12px;
+  font-size: 20px;
 }
 
 .form-group select {
@@ -115,9 +111,8 @@ font-size: 20px;
   border-radius: 4px;
   background-color: #f9f9f9;
   font-size: 16px;
-  
 }
-.button-container{
+.button-container {
   display: flex;
   justify-content: center;
 }
@@ -136,15 +131,14 @@ font-size: 20px;
     margin: 0 auto;
     padding: 10px;
   }
-  
+
   input {
     width: 90%;
     padding: 6px;
   }
 
-  .input{
+  .input {
     width: 140px;
-
   }
 
   .form-group select {
@@ -154,9 +148,8 @@ font-size: 20px;
     border-radius: 4px;
     background-color: #f9f9f9;
     font-size: 16px;
-    
   }
-  
+
   .submit-button {
     padding: 8px 16px;
     max-width: 100px;

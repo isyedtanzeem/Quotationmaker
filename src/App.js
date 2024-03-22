@@ -8,6 +8,7 @@ import BocInvoice from './Pages/BocInvoice';
 import HtmInvoice from './Pages/HtmInvoice';
 import HtmLr from './Pages/HtmLr';
 import BcsQuotation from './Pages/BcsQuotation';
+import BcsInvoice from './Pages/BcsInvoice';
 import BocLr from './Pages/BocLr';
 
 
@@ -26,6 +27,7 @@ class App extends Component {
               <Route exact path="/HtmLr" element={<HtmLr />} />
               <Route exact path="/BocLr" element={<BocLr />} />
               <Route exact path="/BcsQuotation" element={<BcsQuotation />} />
+              <Route exact path="/BcsInvoice" element={<BcsInvoice />} />
             </Routes>
       
         </Router>
